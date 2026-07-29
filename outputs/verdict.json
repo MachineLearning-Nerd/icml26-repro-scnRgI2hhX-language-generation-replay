@@ -1,0 +1,705 @@
+{
+  "all_claims_passed": true,
+  "arxiv": "2603.11784",
+  "claims": {
+    "claim_1_uniform_replay_equivalence": {
+      "mechanism": "exhaustive replay-tree execution of the burn-in conversion",
+      "negative_control": {
+        "distinct_inputs": 2,
+        "naive_pre_burnin_outsider_replay_stalls": true
+      },
+      "passed": true,
+      "replay_histories_checked": 2546,
+      "sample_complexity": 3,
+      "scope": "finite exhaustive instances of the exact conversion; universal implication is audited against the public proof",
+      "source": "Theorem 3.1 and Algorithm 1 (Section 4)"
+    },
+    "claim_2_countable_nonuniform_separation": {
+      "mechanism": "direct adversarial trace for d=1,...,12 plus finite-intersection contradiction",
+      "negative_control": "Removing replay makes the shared trace invalid for h_d as soon as a fresh output exceeds d.",
+      "passed": true,
+      "scope": "the exact symbolic contradiction is instantiated over twelve thresholds; source proof supplies arbitrary d.",
+      "source": "Theorem 4.1 (Section 5): h_n and h_infty construction",
+      "trials": [
+        {
+          "d": 1,
+          "fresh_naturals": [
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "intersection_exhausted": true,
+          "same_trace_is_not_standard_sequence_for_h_d": true
+        },
+        {
+          "d": 2,
+          "fresh_naturals": [
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9
+          ],
+          "intersection_exhausted": true,
+          "same_trace_is_not_standard_sequence_for_h_d": true
+        },
+        {
+          "d": 3,
+          "fresh_naturals": [
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11
+          ],
+          "intersection_exhausted": true,
+          "same_trace_is_not_standard_sequence_for_h_d": true
+        },
+        {
+          "d": 4,
+          "fresh_naturals": [
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13
+          ],
+          "intersection_exhausted": true,
+          "same_trace_is_not_standard_sequence_for_h_d": true
+        },
+        {
+          "d": 5,
+          "fresh_naturals": [
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15
+          ],
+          "intersection_exhausted": true,
+          "same_trace_is_not_standard_sequence_for_h_d": true
+        },
+        {
+          "d": 6,
+          "fresh_naturals": [
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17
+          ],
+          "intersection_exhausted": true,
+          "same_trace_is_not_standard_sequence_for_h_d": true
+        },
+        {
+          "d": 7,
+          "fresh_naturals": [
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ],
+          "intersection_exhausted": true,
+          "same_trace_is_not_standard_sequence_for_h_d": true
+        },
+        {
+          "d": 8,
+          "fresh_naturals": [
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21
+          ],
+          "intersection_exhausted": true,
+          "same_trace_is_not_standard_sequence_for_h_d": true
+        },
+        {
+          "d": 9,
+          "fresh_naturals": [
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22,
+            23
+          ],
+          "intersection_exhausted": true,
+          "same_trace_is_not_standard_sequence_for_h_d": true
+        },
+        {
+          "d": 10,
+          "fresh_naturals": [
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22,
+            23,
+            24,
+            25
+          ],
+          "intersection_exhausted": true,
+          "same_trace_is_not_standard_sequence_for_h_d": true
+        },
+        {
+          "d": 11,
+          "fresh_naturals": [
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22,
+            23,
+            24,
+            25,
+            26,
+            27
+          ],
+          "intersection_exhausted": true,
+          "same_trace_is_not_standard_sequence_for_h_d": true
+        },
+        {
+          "d": 12,
+          "fresh_naturals": [
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22,
+            23,
+            24,
+            25,
+            26,
+            27,
+            28,
+            29
+          ],
+          "intersection_exhausted": true,
+          "same_trace_is_not_standard_sequence_for_h_d": true
+        }
+      ]
+    },
+    "claim_3_wp_countable_limit_generation": {
+      "mechanism": "independent finite-prefix transcription of critical hypotheses, witness set, sure set, and output rule",
+      "negative_control": {
+        "fails_to_make_witness_sure_under_replay": true,
+        "protected_witness": 5,
+        "unprotected_output": 5
+      },
+      "passed": true,
+      "scope": "full Algorithm-2 transition rules on an infinite-support countable-class instance; the source lemmas establish universality.",
+      "source": "Theorem 5.1 and Algorithm 2 Witness Protection (Section 6)",
+      "trace": [
+        {
+          "output": 2,
+          "sure": [
+            1
+          ],
+          "t": 1,
+          "witnesses": [],
+          "x": 1
+        },
+        {
+          "output": 3,
+          "sure": [
+            1,
+            4
+          ],
+          "t": 2,
+          "witnesses": [
+            5
+          ],
+          "x": 4
+        },
+        {
+          "output": 6,
+          "sure": [
+            1,
+            4,
+            5
+          ],
+          "t": 3,
+          "witnesses": [],
+          "x": 5
+        },
+        {
+          "output": 7,
+          "sure": [
+            1,
+            4,
+            5
+          ],
+          "t": 4,
+          "witnesses": [],
+          "x": 3
+        },
+        {
+          "output": 8,
+          "sure": [
+            1,
+            4,
+            5
+          ],
+          "t": 5,
+          "witnesses": [],
+          "x": 6
+        },
+        {
+          "output": 9,
+          "sure": [
+            1,
+            4,
+            5
+          ],
+          "t": 6,
+          "witnesses": [],
+          "x": 7
+        },
+        {
+          "output": 10,
+          "sure": [
+            1,
+            4,
+            5
+          ],
+          "t": 7,
+          "witnesses": [],
+          "x": 8
+        },
+        {
+          "output": 11,
+          "sure": [
+            1,
+            4,
+            5
+          ],
+          "t": 8,
+          "witnesses": [],
+          "x": 9
+        }
+      ]
+    },
+    "claim_4_uncountable_limit_separation": {
+      "all_forced_outputs_invalid_for_actual_target": true,
+      "mechanism": "six exact adversarial phase transitions with symbolic forced fresh outputs and H_2^z membership audit",
+      "negative_control": {
+        "without_replay_marker_is_illegal_for_H1_zminus1": true
+      },
+      "passed": true,
+      "phases": [
+        {
+          "anchor": 5,
+          "forced_fresh_output": 10,
+          "phase": 1,
+          "tail_presented": [
+            7,
+            8,
+            9
+          ],
+          "withheld_from_actual_target": true
+        },
+        {
+          "anchor": 4,
+          "forced_fresh_output": 14,
+          "phase": 2,
+          "tail_presented": [
+            11,
+            12,
+            13
+          ],
+          "withheld_from_actual_target": true
+        },
+        {
+          "anchor": 3,
+          "forced_fresh_output": 18,
+          "phase": 3,
+          "tail_presented": [
+            15,
+            16,
+            17
+          ],
+          "withheld_from_actual_target": true
+        },
+        {
+          "anchor": 2,
+          "forced_fresh_output": 22,
+          "phase": 4,
+          "tail_presented": [
+            19,
+            20,
+            21
+          ],
+          "withheld_from_actual_target": true
+        },
+        {
+          "anchor": 1,
+          "forced_fresh_output": 26,
+          "phase": 5,
+          "tail_presented": [
+            23,
+            24,
+            25
+          ],
+          "withheld_from_actual_target": true
+        },
+        {
+          "anchor": 0,
+          "forced_fresh_output": 30,
+          "phase": 6,
+          "tail_presented": [
+            27,
+            28,
+            29
+          ],
+          "withheld_from_actual_target": true
+        }
+      ],
+      "scope": "source-faithful symbolic execution of the uncountable-class construction; finite code checks each membership invariant, while the public proof supplies all phases.",
+      "source": "Theorem 5.6, Lemmas H-gen-limit and H-not-gen-replay (Section 6)",
+      "z": 6
+    },
+    "claim_5_proper_membership_query_lower_bound": {
+      "eventually_h1_final_trap": {
+        "in_h1": true,
+        "in_target": false,
+        "target_index": 7,
+        "trap_instance": 19
+      },
+      "infinitely_often_non_h1_prefix": [
+        {
+          "in_h1": false,
+          "in_output": true,
+          "instance": 3,
+          "output_index": 2
+        },
+        {
+          "in_h1": false,
+          "in_output": true,
+          "instance": 7,
+          "output_index": 3
+        },
+        {
+          "in_h1": false,
+          "in_output": true,
+          "instance": 11,
+          "output_index": 4
+        },
+        {
+          "in_h1": false,
+          "in_output": true,
+          "instance": 15,
+          "output_index": 5
+        }
+      ],
+      "mechanism": "independent two-case audit of diagonalization and final-trap invariants",
+      "negative_control": {
+        "fails": true,
+        "remove_trap_assignment": "h1 need not overgeneralize"
+      },
+      "passed": true,
+      "scope": "finite prefixes instantiate both exhaustive proof cases; the source construction extends them to arbitrary deterministic membership-query generators.",
+      "source": "Theorem 6.1 and Algorithm 3 hard hypothesis class (Section 7)"
+    },
+    "claim_6_finite_proper_replay_hardness": {
+      "cases": [
+        {
+          "candidate_targets": [
+            "h1+",
+            "h2+"
+          ],
+          "first_output": "h1-",
+          "intersection_window": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22,
+            23,
+            24,
+            25,
+            26,
+            27,
+            28,
+            29,
+            30,
+            31,
+            32,
+            33,
+            34,
+            35,
+            36,
+            37,
+            38,
+            39,
+            40
+          ],
+          "no_hypothesis_subset": true,
+          "replayed_examples": [
+            -1,
+            -2
+          ]
+        },
+        {
+          "candidate_targets": [
+            "h1+",
+            "h2+"
+          ],
+          "first_output": "h2-",
+          "intersection_window": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22,
+            23,
+            24,
+            25,
+            26,
+            27,
+            28,
+            29,
+            30,
+            31,
+            32,
+            33,
+            34,
+            35,
+            36,
+            37,
+            38,
+            39,
+            40
+          ],
+          "no_hypothesis_subset": true,
+          "replayed_examples": [
+            -1,
+            -2
+          ]
+        },
+        {
+          "candidate_targets": [
+            "h1-",
+            "h2-"
+          ],
+          "first_output": "h1+",
+          "intersection_window": [
+            -40,
+            -39,
+            -38,
+            -37,
+            -36,
+            -35,
+            -34,
+            -33,
+            -32,
+            -31,
+            -30,
+            -29,
+            -28,
+            -27,
+            -26,
+            -25,
+            -24,
+            -23,
+            -22,
+            -21,
+            -20,
+            -19,
+            -18,
+            -17,
+            -16,
+            -15,
+            -14,
+            -13,
+            -12,
+            -11,
+            -10,
+            -9,
+            -8,
+            -7,
+            -6,
+            -5,
+            -4,
+            -3,
+            -2,
+            -1,
+            0
+          ],
+          "no_hypothesis_subset": true,
+          "replayed_examples": [
+            1,
+            2
+          ]
+        },
+        {
+          "candidate_targets": [
+            "h1-",
+            "h2-"
+          ],
+          "first_output": "h2+",
+          "intersection_window": [
+            -40,
+            -39,
+            -38,
+            -37,
+            -36,
+            -35,
+            -34,
+            -33,
+            -32,
+            -31,
+            -30,
+            -29,
+            -28,
+            -27,
+            -26,
+            -25,
+            -24,
+            -23,
+            -22,
+            -21,
+            -20,
+            -19,
+            -18,
+            -17,
+            -16,
+            -15,
+            -14,
+            -13,
+            -12,
+            -11,
+            -10,
+            -9,
+            -8,
+            -7,
+            -6,
+            -5,
+            -4,
+            -3,
+            -2,
+            -1,
+            0
+          ],
+          "no_hypothesis_subset": true,
+          "replayed_examples": [
+            1,
+            2
+          ]
+        }
+      ],
+      "mechanism": "exhaustive four-way first-output symmetry audit and set-intersection check",
+      "negative_control": {
+        "fails": true,
+        "without_replayed_exceptions": "the shared adversarial sequence is not legal for both opposite targets"
+      },
+      "passed": true,
+      "scope": "all four hypotheses and all first-output cases are exhausted; half-line identities are additionally checked on [-40,40].",
+      "source": "Theorem 6.3 (Section 7): {h1-, h2-, h1+, h2+}"
+    }
+  },
+  "limitations": "Executable checks validate stated construction invariants and negative controls. Universal theorem quantifiers remain justified by the linked primary-source proofs, not by finite execution alone.",
+  "method": "source-faithful executable construction audits",
+  "paper": "scnRgI2hhX"
+}

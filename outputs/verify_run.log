@@ -1,0 +1,12 @@
+{
+  "all_claims_passed": true,
+  "claim_count": 6,
+  "claims": {
+    "claim_1_uniform_replay_equivalence": true,
+    "claim_2_countable_nonuniform_separation": true,
+    "claim_3_wp_countable_limit_generation": true,
+    "claim_4_uncountable_limit_separation": true,
+    "claim_5_proper_membership_query_lower_bound": true,
+    "claim_6_finite_proper_replay_hardness": true
+  }
+}
