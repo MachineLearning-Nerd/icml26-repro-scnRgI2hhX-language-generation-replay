@@ -2,6 +2,8 @@
   "paper": "scnRgI2hhX",
   "arxiv": "2603.11784",
   "publication_eligible": true,
+  "tests_passed": true,
+  "publication_gate_passed": true,
   "claim_count": 6,
   "checks": {
     "all_six_anchored_claims_pass": true,

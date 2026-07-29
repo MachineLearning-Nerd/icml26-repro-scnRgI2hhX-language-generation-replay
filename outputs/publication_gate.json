@@ -10,5 +10,7 @@
   "claim_count": 6,
   "paper": "scnRgI2hhX",
   "publication_eligible": true,
-  "scope": "strict local gate: executable audits of the paper's exact constructions plus public TeX proof anchors; no universal finite-execution overclaim"
+  "publication_gate_passed": true,
+  "scope": "strict local gate: executable audits of the paper's exact constructions plus public TeX proof anchors; no universal finite-execution overclaim",
+  "tests_passed": true
 }

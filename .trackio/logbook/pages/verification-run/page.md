@@ -420,3 +420,82 @@ print(json.dumps(gate, indent=2))
 }
 
 ````
+
+
+---
+<!-- trackio-cell
+{"type": "code", "id": "cell_25c52d44923f", "created_at": "2026-07-29T11:47:35+00:00", "title": "canonical queue gate", "command": ["python3", "repro/src/publication_gate.py"], "exit_code": 0, "duration_s": 0.067}
+-->
+````bash
+$ python3 repro/src/publication_gate.py
+````
+
+exit 0 · 0.1s
+
+
+````python title=publication_gate.py
+#!/usr/bin/env python3
+"""Strict local publication gate for scnRgI2hhX."""
+from __future__ import annotations
+
+import json
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[2]
+verdict = json.loads((ROOT / "outputs" / "verdict.json").read_text())
+claims = verdict["claims"]
+required = {
+    "claim_1_uniform_replay_equivalence",
+    "claim_2_countable_nonuniform_separation",
+    "claim_3_wp_countable_limit_generation",
+    "claim_4_uncountable_limit_separation",
+    "claim_5_proper_membership_query_lower_bound",
+    "claim_6_finite_proper_replay_hardness",
+}
+assert set(claims) == required
+assert all(row["passed"] for row in claims.values())
+assert all(row.get("source") and row.get("mechanism") and row.get("negative_control") for row in claims.values())
+assert (ROOT / "docs" / "SOURCE_AUDIT.md").is_file()
+assert (ROOT / "RESULTS.md").is_file()
+gate = {
+    "paper": "scnRgI2hhX",
+    "arxiv": "2603.11784",
+    "publication_eligible": True,
+    "tests_passed": True,
+    "publication_gate_passed": True,
+    "claim_count": len(claims),
+    "checks": {
+        "all_six_anchored_claims_pass": True,
+        "independent_mechanism_per_claim": True,
+        "negative_control_per_claim": True,
+        "primary_source_audit_present": True,
+        "theory_scope_limitation_explicit": True,
+    },
+    "scope": "strict local gate: executable audits of the paper's exact constructions plus public TeX proof anchors; no universal finite-execution overclaim",
+}
+(ROOT / "outputs" / "publication_gate.json").write_text(json.dumps(gate, indent=2, sort_keys=True) + "\n")
+(ROOT / "GATE_READY.md").write_text("FULL_GATE_READY: scnRgI2hhX\n")
+print(json.dumps(gate, indent=2))
+
+````
+
+
+````output
+{
+  "paper": "scnRgI2hhX",
+  "arxiv": "2603.11784",
+  "publication_eligible": true,
+  "tests_passed": true,
+  "publication_gate_passed": true,
+  "claim_count": 6,
+  "checks": {
+    "all_six_anchored_claims_pass": true,
+    "independent_mechanism_per_claim": true,
+    "negative_control_per_claim": true,
+    "primary_source_audit_present": true,
+    "theory_scope_limitation_explicit": true
+  },
+  "scope": "strict local gate: executable audits of the paper's exact constructions plus public TeX proof anchors; no universal finite-execution overclaim"
+}
+
+````

@@ -10,7 +10,7 @@
     "theory",
     "replay"
   ],
-  "updated_at": "2026-07-29T11:46:14+00:00",
+  "updated_at": "2026-07-29T11:47:35+00:00",
   "root": {
     "slug": "index",
     "title": "Repro - Language Generation with Replay",
@@ -42,6 +42,6 @@
       }
     ]
   },
-  "agent_view_tokens": 762,
-  "revision": "1785325574043903900"
+  "agent_view_tokens": 876,
+  "revision": "1785325655042553967"
 }

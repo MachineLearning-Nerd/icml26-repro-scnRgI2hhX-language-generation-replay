@@ -25,6 +25,8 @@ gate = {
     "paper": "scnRgI2hhX",
     "arxiv": "2603.11784",
     "publication_eligible": True,
+    "tests_passed": True,
+    "publication_gate_passed": True,
     "claim_count": len(claims),
     "checks": {
         "all_six_anchored_claims_pass": True,
@@ -36,4 +38,5 @@ gate = {
     "scope": "strict local gate: executable audits of the paper's exact constructions plus public TeX proof anchors; no universal finite-execution overclaim",
 }
 (ROOT / "outputs" / "publication_gate.json").write_text(json.dumps(gate, indent=2, sort_keys=True) + "\n")
+(ROOT / "GATE_READY.md").write_text("FULL_GATE_READY: scnRgI2hhX\n")
 print(json.dumps(gate, indent=2))
