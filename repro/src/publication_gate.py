@@ -19,6 +19,10 @@ required = {
 assert set(claims) == required
 assert all(row["passed"] for row in claims.values())
 assert all(row.get("source") and row.get("mechanism") and row.get("negative_control") for row in claims.values())
+assert verdict["run_metadata"]["requested_flavor"] == "cpu-upgrade"
+assert verdict["run_metadata"]["estimated_cores_required"] == 1
+assert verdict["run_metadata"]["cpu_logical"] >= 1
+assert verdict["run_metadata"]["runtime_seconds"] >= 0
 assert (ROOT / "docs" / "SOURCE_AUDIT.md").is_file()
 assert (ROOT / "RESULTS.md").is_file()
 gate = {

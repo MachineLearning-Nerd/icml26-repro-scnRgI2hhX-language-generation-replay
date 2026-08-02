@@ -11,6 +11,12 @@ from __future__ import annotations
 
 import itertools
 import json
+import os
+import platform
+import subprocess
+import sys
+import time
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Callable
 
@@ -288,6 +294,15 @@ def c6_finite_proper_replay() -> dict:
 
 
 def main() -> None:
+    started = time.perf_counter()
+    affinity = len(os.sched_getaffinity(0)) if hasattr(os, "sched_getaffinity") else None
+    git_sha = subprocess.run(
+        ["git", "rev-parse", "HEAD"],
+        cwd=ROOT,
+        check=True,
+        capture_output=True,
+        text=True,
+    ).stdout.strip()
     OUT.mkdir(parents=True, exist_ok=True)
     claims = {
         "claim_1_uniform_replay_equivalence": c1_uniform_conversion(),
@@ -301,12 +316,27 @@ def main() -> None:
         "paper": "scnRgI2hhX",
         "arxiv": "2603.11784",
         "method": "source-faithful executable construction audits",
+        "run_metadata": {
+            "backend": "huggingface",
+            "requested_flavor": "cpu-upgrade",
+            "estimated_cores_required": 1,
+            "cpu_logical": os.cpu_count(),
+            "cpu_affinity": affinity,
+            "platform": platform.platform(),
+            "python": sys.version.split()[0],
+            "git_sha": git_sha,
+            "seeds": [],
+            "determinism": "No stochastic operations.",
+            "started_utc": datetime.now(timezone.utc).isoformat(),
+        },
         "all_claims_passed": all(row["passed"] for row in claims.values()),
         "claims": claims,
         "limitations": "Executable checks validate stated construction invariants and negative controls. Universal theorem quantifiers remain justified by the linked primary-source proofs, not by finite execution alone.",
     }
+    result["run_metadata"]["runtime_seconds"] = round(time.perf_counter() - started, 6)
     (OUT / "verdict.json").write_text(json.dumps(result, indent=2, sort_keys=True) + "\n")
-    print(json.dumps({"all_claims_passed": result["all_claims_passed"], "claim_count": len(claims),
+    print(json.dumps({"run_metadata": result["run_metadata"],
+                      "all_claims_passed": result["all_claims_passed"], "claim_count": len(claims),
                       "claims": {k: v["passed"] for k, v in claims.items()}}, indent=2))
 
 

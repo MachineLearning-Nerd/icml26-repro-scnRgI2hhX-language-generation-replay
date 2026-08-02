@@ -1,0 +1,7 @@
+[project]
+name = "language-generation-replay-reproduction"
+version = "0.1.0"
+description = "Reproducible verification for arXiv:2603.11784"
+requires-python = "==3.12.*"
+dependencies = []
+
