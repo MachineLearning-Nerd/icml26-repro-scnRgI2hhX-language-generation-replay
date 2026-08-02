@@ -25,5 +25,11 @@ passed; the mutation exited 1.
 - [Claim contract](../../../../.openresearch/artifacts/claim_1/claim_contract.json)
 - [Source audit](../../../../.openresearch/artifacts/claim_1/source_audit.md)
 - [Exact commands](../../../../.openresearch/artifacts/claim_1/commands.txt)
+- [Proof source](../../../../repro/src/c1_proof.py)
+- [Independent checker source](../../../../repro/src/c1_checker.py)
+- [Method](../../../../.openresearch/artifacts/claim_1/method.md)
+- [Limitations](../../../../.openresearch/artifacts/claim_1/limitations.md)
+- [Evaluator audit](../../../../.openresearch/artifacts/claim_1/EVAL.md)
+- [Pinned environment](../../../../uv.lock)
 
 Historical finite-support verification remains reachable and is labeled rejected baseline.

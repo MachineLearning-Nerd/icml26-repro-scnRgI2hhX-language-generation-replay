@@ -8,6 +8,7 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
+FIXED_COMMAND = "uv sync --frozen --no-dev && uv run --no-sync python repro/src/verify.py && uv run --no-sync python repro/src/publication_gate.py"
 verdict = json.loads((ROOT / "outputs" / "verdict.json").read_text())
 claims = verdict["claims"]
 required = {
@@ -31,6 +32,47 @@ assert verdict["exact_claims"]["claim_2_countable_nonuniform_separation"]["verdi
 assert verdict["exact_claims"]["claim_3_wp_countable_limit_generation"]["verdict"] == "VERIFIED"
 assert verdict["exact_claims"]["claim_4_uncountable_limit_separation"]["verdict"] == "VERIFIED"
 assert verdict["exact_claims"]["claim_5_proper_membership_query_lower_bound"]["verdict"] == "VERIFIED"
+
+artifact_names = {
+    "claim_contract.json",
+    "source_audit.md",
+    "method.md",
+    "raw_result.json",
+    "checker_output.json",
+    "negative_control_output.json",
+    "commands.txt",
+    "EVAL.md",
+    "limitations.md",
+}
+for claim_number in range(1, 7):
+    artifact_dir = ROOT / ".openresearch" / "artifacts" / f"claim_{claim_number}"
+    assert artifact_names <= {path.name for path in artifact_dir.iterdir()}
+    assert FIXED_COMMAND in (artifact_dir / "commands.txt").read_text()
+    page = ROOT / ".trackio" / "logbook" / "pages" / f"claim-{claim_number}-current" / "page.md"
+    page_text = page.read_text()
+    assert "VERIFIED" in page_text
+    assert FIXED_COMMAND in page_text
+    assert "Raw result" in page_text or "Structural raw result" in page_text
+
+logbook = json.loads((ROOT / ".trackio" / "logbook" / "logbook.json").read_text())
+assert logbook["space_id"] == "DineshAI/scnRgI2hhX"
+assert logbook["paper"] == "2603.11784"
+assert logbook["root"]["children"][0]["slug"] == "visibility-matrix"
+matrix = (ROOT / ".trackio" / "logbook" / "pages" / "visibility-matrix" / "page.md").read_text()
+assert matrix.count("| Candidate VERIFIED;") == 6
+assert all(f"| {claim_number} |" in matrix for claim_number in range(1, 7))
+historical = (ROOT / ".trackio" / "logbook" / "pages" / "historical-rejected-baseline" / "page.md").read_text()
+assert historical.startswith("# Historical rejected baseline")
+assert (ROOT / "reports" / "replay-reproduction" / "report.md").is_file()
+assert len(list((ROOT / "reports" / "replay-reproduction" / "images").glob("*.svg"))) == 4
+assert (ROOT / "notebooks" / "replay_reproduction.py").is_file()
+
+text_suffixes = {".md", ".py", ".json", ".toml", ".lock", ".txt", ".svg"}
+secret_markers = ("HF_" + "TOKEN=", "HUGGING_FACE_HUB_" + "TOKEN=", "github_" + "pat_", "sk-" + "proj-")
+for path in ROOT.rglob("*"):
+    if path.is_file() and path.suffix in text_suffixes and ".venv" not in path.parts and ".git" not in path.parts:
+        contents = path.read_text(errors="ignore")
+        assert not any(marker in contents for marker in secret_markers), f"secret marker in {path.relative_to(ROOT)}"
 checker = subprocess.run(
     [sys.executable, str(ROOT / "repro" / "src" / "c6_independent.py"), str(ROOT / "outputs" / "c6_exact.json")],
     check=True,
@@ -137,6 +179,10 @@ gate = {
         "negative_control_per_claim": True,
         "primary_source_audit_present": True,
         "theory_scope_limitation_explicit": True,
+        "evaluator_visibility_matrix_complete": True,
+        "historical_baseline_demoted": True,
+        "release_report_and_notebook_present": True,
+        "secret_marker_scan_passed": True,
     },
     "scope": "strict local gate: executable audits of the paper's exact constructions plus public TeX proof anchors; no universal finite-execution overclaim",
 }
@@ -164,3 +210,4 @@ print("C4_NEGATIVE_CONTROL=" + c4_control.stdout.strip())
 print("C5_CHECKER=" + c5_checker.stdout.strip())
 print("C5_NEGATIVE_CONTROL_EXIT=" + str(c5_control.returncode))
 print("C5_NEGATIVE_CONTROL=" + c5_control.stdout.strip())
+print("RELEASE_VISIBILITY_GATE=PASS")

@@ -4,6 +4,8 @@
 
 | Page |
 | --- |
+| [Start here — evaluator-visible evidence matrix](#/visibility-matrix) |
+| [Candidate release report and score forecast](#/release-report) |
 | [Current verification — Claim 5 universal MQ lower bound](#/claim-5-current) |
 | [Current verification — Claim 4 infinite diagonalization](#/claim-4-current) |
 | [Current verification — Claim 3 universal WP proof](#/claim-3-current) |
@@ -13,4 +15,4 @@
 | [Overview](#/overview) |
 | [Claims](#/claims) |
 | [Evidence](#/evidence) |
-| [Historical rejected baseline — Verification run](#/verification-run) |
+| [Historical rejected baseline](#/historical-rejected-baseline) |

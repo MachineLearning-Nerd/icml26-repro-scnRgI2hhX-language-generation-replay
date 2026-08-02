@@ -44,6 +44,14 @@ Downloadable evidence:
 - [Claim contract](../../../../.openresearch/artifacts/claim_6/claim_contract.json)
 - [Source audit](../../../../.openresearch/artifacts/claim_6/source_audit.md)
 - [Exact commands](../../../../.openresearch/artifacts/claim_6/commands.txt)
+- [Structural proof source](../../../../repro/src/c6_exact.py)
+- [Structural checker source](../../../../repro/src/c6_independent.py)
+- [Cell proof source](../../../../repro/src/c6_cell_solver.py)
+- [Cell checker source](../../../../repro/src/c6_cell_checker.py)
+- [Method](../../../../.openresearch/artifacts/claim_6/method.md)
+- [Limitations](../../../../.openresearch/artifacts/claim_6/limitations.md)
+- [Evaluator audit](../../../../.openresearch/artifacts/claim_6/EVAL.md)
+- [Pinned environment](../../../../uv.lock)
 
 ## Scope
 

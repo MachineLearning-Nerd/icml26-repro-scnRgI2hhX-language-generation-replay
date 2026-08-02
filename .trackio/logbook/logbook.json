@@ -2,20 +2,32 @@
   "schema_version": 1,
   "title": "Repro - Language Generation with Replay",
   "emoji": "🎯",
-  "space_id": null,
-  "paper": null,
+  "space_id": "DineshAI/scnRgI2hhX",
+  "paper": "2603.11784",
   "tags": [
     "icml2026-repro",
     "paper-scnRgI2hhX",
     "theory",
     "replay"
   ],
-  "updated_at": "2026-07-29T11:47:35+00:00",
+  "updated_at": "2026-08-02T00:00:00+00:00",
   "root": {
     "slug": "index",
     "title": "Repro - Language Generation with Replay",
     "file": "pages/index.md",
     "children": [
+      {
+        "slug": "visibility-matrix",
+        "title": "Start here — evaluator-visible evidence matrix",
+        "file": "pages/visibility-matrix/page.md",
+        "children": []
+      },
+      {
+        "slug": "release-report",
+        "title": "Candidate release report and score forecast",
+        "file": "pages/release-report/page.md",
+        "children": []
+      },
       {
         "slug": "claim-5-current",
         "title": "Current verification — Claim 5 universal MQ lower bound",
@@ -71,9 +83,9 @@
         "children": []
       },
       {
-        "slug": "verification-run",
-        "title": "Historical rejected baseline — Verification run",
-        "file": "pages/verification-run/page.md",
+        "slug": "historical-rejected-baseline",
+        "title": "Historical rejected baseline",
+        "file": "pages/historical-rejected-baseline/page.md",
         "children": []
       }
     ]

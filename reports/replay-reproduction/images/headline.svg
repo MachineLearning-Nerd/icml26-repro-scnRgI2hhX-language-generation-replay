@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="420" viewBox="0 0 1000 420" role="img" aria-labelledby="title desc">
+  <title id="title">Six claims upgraded from finite checks to exact proof certificates</title>
+  <desc id="desc">All six candidate verifiers pass. The live judge score remains six of twelve and the conservative forecast is eight to twelve.</desc>
+  <rect width="1000" height="420" fill="#0b1020"/>
+  <text x="55" y="65" fill="#f8fafc" font-family="sans-serif" font-size="30" font-weight="700">From finite instances to quantified certificates</text>
+  <text x="55" y="105" fill="#94a3b8" font-family="sans-serif" font-size="18">Current candidate evidence • live judge unchanged</text>
+  <g font-family="sans-serif" text-anchor="middle">
+    <g fill="#22c55e"><rect x="55" y="145" width="130" height="105" rx="14"/><rect x="205" y="145" width="130" height="105" rx="14"/><rect x="355" y="145" width="130" height="105" rx="14"/><rect x="505" y="145" width="130" height="105" rx="14"/><rect x="655" y="145" width="130" height="105" rx="14"/><rect x="805" y="145" width="130" height="105" rx="14"/></g>
+    <g fill="#052e16" font-size="28" font-weight="700"><text x="120" y="190">C1</text><text x="270" y="190">C2</text><text x="420" y="190">C3</text><text x="570" y="190">C4</text><text x="720" y="190">C5</text><text x="870" y="190">C6</text></g>
+    <g fill="#052e16" font-size="15"><text x="120" y="222">VERIFIED</text><text x="270" y="222">VERIFIED</text><text x="420" y="222">VERIFIED</text><text x="570" y="222">VERIFIED</text><text x="720" y="222">VERIFIED</text><text x="870" y="222">VERIFIED</text></g>
+  </g>
+  <rect x="55" y="295" width="260" height="82" rx="12" fill="#1e293b"/><text x="75" y="328" fill="#94a3b8" font-family="sans-serif" font-size="15">PREVIOUS LIVE JUDGE</text><text x="75" y="361" fill="#f8fafc" font-family="sans-serif" font-size="29" font-weight="700">6 / 12</text>
+  <rect x="345" y="295" width="310" height="82" rx="12" fill="#1e293b"/><text x="365" y="328" fill="#94a3b8" font-family="sans-serif" font-size="15">CONSERVATIVE FORECAST</text><text x="365" y="361" fill="#f8fafc" font-family="sans-serif" font-size="29" font-weight="700">8–12 / 12</text>
+  <rect x="685" y="295" width="250" height="82" rx="12" fill="#1e293b"/><text x="705" y="328" fill="#94a3b8" font-family="sans-serif" font-size="15">COMPUTE</text><text x="705" y="361" fill="#f8fafc" font-family="sans-serif" font-size="22" font-weight="700">CPU only • no GPU</text>
+</svg>
