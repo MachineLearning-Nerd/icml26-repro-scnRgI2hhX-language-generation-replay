@@ -26,6 +26,7 @@ assert verdict["run_metadata"]["estimated_cores_required"] == 1
 assert verdict["run_metadata"]["cpu_logical"] >= 1
 assert verdict["run_metadata"]["runtime_seconds"] >= 0
 assert verdict["exact_claims"]["claim_6_finite_proper_replay_hardness"]["verdict"] == "VERIFIED"
+assert verdict["exact_claims"]["claim_1_uniform_replay_equivalence"]["verdict"] == "VERIFIED"
 checker = subprocess.run(
     [sys.executable, str(ROOT / "repro" / "src" / "c6_independent.py"), str(ROOT / "outputs" / "c6_exact.json")],
     check=True,
@@ -34,6 +35,12 @@ checker = subprocess.run(
 )
 cell_checker = subprocess.run(
     [sys.executable, str(ROOT / "repro" / "src" / "c6_cell_checker.py"), str(ROOT / "outputs" / "c6_cell_certificate.json")],
+    check=True,
+    capture_output=True,
+    text=True,
+)
+c1_checker = subprocess.run(
+    [sys.executable, str(ROOT / "repro" / "src" / "c1_checker.py"), str(ROOT / "outputs" / "c1_proof.json")],
     check=True,
     capture_output=True,
     text=True,
@@ -52,6 +59,13 @@ cell_control = subprocess.run(
     text=True,
 )
 assert cell_control.returncode != 0
+c1_control = subprocess.run(
+    [sys.executable, str(ROOT / "repro" / "src" / "c1_proof.py"), "--mutated-control"],
+    check=False,
+    capture_output=True,
+    text=True,
+)
+assert c1_control.returncode != 0
 assert (ROOT / "docs" / "SOURCE_AUDIT.md").is_file()
 assert (ROOT / "RESULTS.md").is_file()
 gate = {
@@ -79,3 +93,6 @@ print("C6_NEGATIVE_CONTROL=" + control.stdout.strip())
 print("C6_CELL_CHECKER=" + cell_checker.stdout.strip())
 print("C6_CELL_NEGATIVE_CONTROL_EXIT=" + str(cell_control.returncode))
 print("C6_CELL_NEGATIVE_CONTROL=" + cell_control.stdout.strip())
+print("C1_CHECKER=" + c1_checker.stdout.strip())
+print("C1_NEGATIVE_CONTROL_EXIT=" + str(c1_control.returncode))
+print("C1_NEGATIVE_CONTROL=" + c1_control.stdout.strip())

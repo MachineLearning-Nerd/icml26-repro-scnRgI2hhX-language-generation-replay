@@ -17,6 +17,12 @@
     "file": "pages/index.md",
     "children": [
       {
+        "slug": "claim-1-current",
+        "title": "Current verification — Claim 1 exact reduction",
+        "file": "pages/claim-1-current/page.md",
+        "children": []
+      },
+      {
         "slug": "claim-6-current",
         "title": "Claim 6 — current exact verification",
         "file": "pages/claim-6-current/page.md",

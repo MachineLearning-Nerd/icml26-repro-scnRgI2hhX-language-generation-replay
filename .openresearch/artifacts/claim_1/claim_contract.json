@@ -1,0 +1,8 @@
+{
+  "claim_id": "claim_1",
+  "paper_statement": "Uniform generation with replay is equivalent to standard uniform generation, without increasing sample complexity.",
+  "source_numbering": {"judge": "Theorem 3.1", "arxiv_v2": "Theorem 4.1"},
+  "assumptions": ["binary hypothesis class", "UUS", "finite standard uniform sample complexity d"],
+  "quantifiers": "arbitrary class, target, finite d, and replay sequence",
+  "acceptance": ["prove both implications", "prove replay-prefix support closure by induction", "derive both optimal-complexity inequalities", "independent checker accepts", "unsafe burn-in mutation exits nonzero"]
+}
