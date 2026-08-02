@@ -32,6 +32,12 @@ checker = subprocess.run(
     capture_output=True,
     text=True,
 )
+cell_checker = subprocess.run(
+    [sys.executable, str(ROOT / "repro" / "src" / "c6_cell_checker.py"), str(ROOT / "outputs" / "c6_cell_certificate.json")],
+    check=True,
+    capture_output=True,
+    text=True,
+)
 control = subprocess.run(
     [sys.executable, str(ROOT / "repro" / "src" / "c6_exact.py"), "--mutated-control"],
     check=False,
@@ -39,6 +45,13 @@ control = subprocess.run(
     text=True,
 )
 assert control.returncode != 0
+cell_control = subprocess.run(
+    [sys.executable, str(ROOT / "repro" / "src" / "c6_cell_solver.py"), "--mutated-control"],
+    check=False,
+    capture_output=True,
+    text=True,
+)
+assert cell_control.returncode != 0
 assert (ROOT / "docs" / "SOURCE_AUDIT.md").is_file()
 assert (ROOT / "RESULTS.md").is_file()
 gate = {
@@ -63,3 +76,6 @@ print(json.dumps(gate, indent=2))
 print("C6_INDEPENDENT_CHECKER=" + checker.stdout.strip())
 print("C6_NEGATIVE_CONTROL_EXIT=" + str(control.returncode))
 print("C6_NEGATIVE_CONTROL=" + control.stdout.strip())
+print("C6_CELL_CHECKER=" + cell_checker.stdout.strip())
+print("C6_CELL_NEGATIVE_CONTROL_EXIT=" + str(cell_control.returncode))
+print("C6_CELL_NEGATIVE_CONTROL=" + cell_control.stdout.strip())

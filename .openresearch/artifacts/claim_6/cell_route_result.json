@@ -1,0 +1,16 @@
+{
+  "source_run_id": "97114bfa-86a7-4a21-8583-4ddd4c51bb4f",
+  "git_sha": "01d8d9fbdea511715c7715f125402d585a5b5ffd",
+  "backend": "huggingface",
+  "flavor": "cpu-upgrade",
+  "estimated_cores": 1,
+  "actual_logical_cpus": 64,
+  "actual_affinity_cpus": 64,
+  "runtime_seconds": 0.017153,
+  "cells": ["x<=-3", "x=-2", "x=-1", "x=0", "x=1", "x=2", "x>=3"],
+  "complete_disjoint_partition": true,
+  "branches_checked": 4,
+  "checker_status": "PASS",
+  "negative_control_exit_code": 1,
+  "verdict": "VERIFIED"
+}

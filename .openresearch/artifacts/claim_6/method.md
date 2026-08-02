@@ -8,3 +8,7 @@ for every possible proper output. There is no integer truncation and no finite t
 `repro/src/c6_independent.py` rechecks the emitted certificate without importing the producer.
 The mutation control changes `h_2^+` to the exact common half-line; the main contradiction must
 then disappear and the verifier must exit nonzero.
+
+An independently written second route partitions every integer into seven exact predicate cells,
+including two unbounded cells. Its truth-table checker shares no Claim 6 implementation with the
+structural normalizer. Both routes were independently executed on Hugging Face `cpu-upgrade`.

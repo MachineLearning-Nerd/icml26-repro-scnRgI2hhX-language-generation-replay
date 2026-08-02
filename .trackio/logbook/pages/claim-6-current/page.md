@@ -11,9 +11,11 @@ limit with replay. The quantified domain is all integers.
 `repro/src/c6_exact.py` supersedes the bounded `[-40,40]` check. It represents the four supports
 as exact half-lines plus exceptions, exhausts all four first outputs, and proves the relevant
 intersection is exactly `Z_{>=0}` or `Z_{<=0}`. `repro/src/c6_independent.py` independently
-checks the emitted certificate. The exact revision and HF run are inserted after execution.
+checks the emitted certificate. A second implementation, `repro/src/c6_cell_solver.py`, performs
+exact quantifier elimination over a complete seven-cell partition of all integers; its checker
+uses an independently hard-coded truth table.
 
-## Expected exact evidence
+## Exact observed evidence
 
 | First output | Legal replays | Simultaneous targets | Exact intersection | Proper outputs available |
 |---|---:|---|---|---:|
@@ -22,9 +24,26 @@ checks the emitted certificate. The exact revision and HF run are inserted after
 | `h1+` | `1,2` | `h1-,h2-` | `Z_{<=0}` | 0 |
 | `h2+` | `1,2` | `h1-,h2-` | `Z_{<=0}` | 0 |
 
+Both routes returned `VERIFIED` on Hugging Face `cpu-upgrade`. The structural run
+`7edf5531-6c44-4aad-a09c-9caba93d4380` used revision `89016e13954320ae9997865dc98d5bb1f8f15b0f`,
+reported 64 logical/affinity CPUs, and took 0.019140 s in the verifier. The cell route
+`97114bfa-86a7-4a21-8583-4ddd4c51bb4f` used revision
+`01d8d9fbdea511715c7715f125402d585a5b5ffd`, reported the same allocation, and took 0.017153 s.
+Both are deterministic and use no seeds.
+
 The negative control changes one hypothesis to the common half-line. The contradiction then
-disappears and the verifier exits nonzero. Raw output, checker output, CPU allocation, runtime,
-and Git SHA will be mirrored here from the HF `cpu-upgrade` run before release.
+disappears and both verifiers exit 1. The independent structural checker and independent cell
+truth-table checker both return `PASS` on the unmutated evidence.
+
+Downloadable evidence:
+
+- [Structural raw result](../../../../.openresearch/artifacts/claim_6/raw_result.json)
+- [Independent checker output](../../../../.openresearch/artifacts/claim_6/checker_output.json)
+- [Negative-control output](../../../../.openresearch/artifacts/claim_6/negative_control_output.json)
+- [Independent cell-route result](../../../../.openresearch/artifacts/claim_6/cell_route_result.json)
+- [Claim contract](../../../../.openresearch/artifacts/claim_6/claim_contract.json)
+- [Source audit](../../../../.openresearch/artifacts/claim_6/source_audit.md)
+- [Exact commands](../../../../.openresearch/artifacts/claim_6/commands.txt)
 
 ## Scope
 

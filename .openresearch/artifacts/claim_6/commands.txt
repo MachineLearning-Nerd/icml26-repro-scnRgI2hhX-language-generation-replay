@@ -1,0 +1,6 @@
+Fixed reproduction command:
+uv sync --frozen --no-dev && uv run --no-sync python repro/src/verify.py && uv run --no-sync python repro/src/publication_gate.py
+
+OpenResearch launch commands:
+orx exp run 3411167e-80ef-4358-8374-46c3c1682668 --flavor cpu-upgrade --timeout 20m --image ghcr.io/astral-sh/uv:0.8.11-python3.12-bookworm-slim
+orx exp run e3e8a331-5eb9-46cb-bb6a-d8e66ddc22b8 --flavor cpu-upgrade --timeout 20m --image ghcr.io/astral-sh/uv:0.8.11-python3.12-bookworm-slim

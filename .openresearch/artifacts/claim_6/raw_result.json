@@ -1,0 +1,21 @@
+{
+  "source_run_id": "7edf5531-6c44-4aad-a09c-9caba93d4380",
+  "git_sha": "89016e13954320ae9997865dc98d5bb1f8f15b0f",
+  "backend": "huggingface",
+  "flavor": "cpu-upgrade",
+  "estimated_cores": 1,
+  "actual_logical_cpus": 64,
+  "actual_affinity_cpus": 64,
+  "python": "3.12.11",
+  "runtime_seconds": 0.01914,
+  "seeds": [],
+  "verdict": "VERIFIED",
+  "all_first_outputs_exhausted": true,
+  "domain": "all integers; exact half-line predicates",
+  "branches": [
+    {"first_output": "h1-", "replays": [-1, -2], "targets": ["h1+", "h2+"], "intersection": "x >= 0", "outside_witnesses": {"h1+": -1, "h1-": -1, "h2+": -2, "h2-": -1}, "contradiction": true},
+    {"first_output": "h2-", "replays": [-1, -2], "targets": ["h1+", "h2+"], "intersection": "x >= 0", "outside_witnesses": {"h1+": -1, "h1-": -1, "h2+": -2, "h2-": -1}, "contradiction": true},
+    {"first_output": "h1+", "replays": [1, 2], "targets": ["h1-", "h2-"], "intersection": "x <= 0", "outside_witnesses": {"h1+": 1, "h1-": 1, "h2+": 1, "h2-": 2}, "contradiction": true},
+    {"first_output": "h2+", "replays": [1, 2], "targets": ["h1-", "h2-"], "intersection": "x <= 0", "outside_witnesses": {"h1+": 1, "h1-": 1, "h2+": 1, "h2-": 2}, "contradiction": true}
+  ]
+}
