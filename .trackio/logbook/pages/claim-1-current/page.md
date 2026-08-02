@@ -14,4 +14,16 @@ The negative control emits an arbitrary outsider during burn-in. Support closure
 
 Fixed command: `uv sync --frozen --no-dev && uv run --no-sync python repro/src/verify.py && uv run --no-sync python repro/src/publication_gate.py`
 
-Source, raw run metadata, checker output, and control output are attached additively in the next cumulative node. Historical finite-support verification remains reachable and is labeled rejected baseline.
+HF run `eebaedd5-f831-42f2-b21c-98931b550467` at revision
+`f4d046d1f37fe024ff50405e205e79ea3b353ab7` reported 64 logical/affinity CPUs and
+0.021013 s verifier runtime. It was deterministic with no seeds. The proof and independent checker
+passed; the mutation exited 1.
+
+- [Raw result](../../../../.openresearch/artifacts/claim_1/raw_result.json)
+- [Checker output](../../../../.openresearch/artifacts/claim_1/checker_output.json)
+- [Negative-control output](../../../../.openresearch/artifacts/claim_1/negative_control_output.json)
+- [Claim contract](../../../../.openresearch/artifacts/claim_1/claim_contract.json)
+- [Source audit](../../../../.openresearch/artifacts/claim_1/source_audit.md)
+- [Exact commands](../../../../.openresearch/artifacts/claim_1/commands.txt)
+
+Historical finite-support verification remains reachable and is labeled rejected baseline.

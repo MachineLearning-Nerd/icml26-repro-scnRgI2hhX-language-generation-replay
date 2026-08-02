@@ -23,6 +23,7 @@ from typing import Callable
 from c6_exact import verify as verify_c6_exact
 from c6_cell_solver import certify as certify_c6_cells
 from c1_proof import certify as certify_c1
+from c2_proof import certify as certify_c2
 
 ROOT = Path(__file__).resolve().parents[2]
 OUT = ROOT / "outputs"
@@ -318,11 +319,13 @@ def main() -> None:
     }
     exact_claims = {
         "claim_1_uniform_replay_equivalence": certify_c1(),
+        "claim_2_countable_nonuniform_separation": certify_c2(),
         "claim_6_finite_proper_replay_hardness": verify_c6_exact(),
         "claim_6_independent_cell_route": certify_c6_cells(),
     }
     assert exact_claims["claim_6_independent_cell_route"]["verdict"] == "VERIFIED"
     assert exact_claims["claim_1_uniform_replay_equivalence"]["verdict"] == "VERIFIED"
+    assert exact_claims["claim_2_countable_nonuniform_separation"]["verdict"] == "VERIFIED"
     result = {
         "paper": "scnRgI2hhX",
         "arxiv": "2603.11784",
@@ -350,12 +353,14 @@ def main() -> None:
     (OUT / "c6_exact.json").write_text(json.dumps(exact_claims["claim_6_finite_proper_replay_hardness"], indent=2, sort_keys=True) + "\n")
     (OUT / "c6_cell_certificate.json").write_text(json.dumps(exact_claims["claim_6_independent_cell_route"], indent=2, sort_keys=True) + "\n")
     (OUT / "c1_proof.json").write_text(json.dumps(exact_claims["claim_1_uniform_replay_equivalence"], indent=2, sort_keys=True) + "\n")
+    (OUT / "c2_proof.json").write_text(json.dumps(exact_claims["claim_2_countable_nonuniform_separation"], indent=2, sort_keys=True) + "\n")
     print(json.dumps({"run_metadata": result["run_metadata"],
                       "all_claims_passed": result["all_claims_passed"], "claim_count": len(claims),
                       "claims": {k: v["passed"] for k, v in claims.items()}}, indent=2))
     print("C6_EXACT_RESULT=" + json.dumps(exact_claims["claim_6_finite_proper_replay_hardness"], sort_keys=True))
     print("C6_CELL_RESULT=" + json.dumps(exact_claims["claim_6_independent_cell_route"], sort_keys=True))
     print("C1_PROOF_RESULT=" + json.dumps(exact_claims["claim_1_uniform_replay_equivalence"], sort_keys=True))
+    print("C2_PROOF_RESULT=" + json.dumps(exact_claims["claim_2_countable_nonuniform_separation"], sort_keys=True))
 
 
 if __name__ == "__main__":

@@ -1,0 +1,16 @@
+{
+  "source_run_id": "eebaedd5-f831-42f2-b21c-98931b550467",
+  "git_sha": "f4d046d1f37fe024ff50405e205e79ea3b353ab7",
+  "backend": "huggingface",
+  "flavor": "cpu-upgrade",
+  "estimated_cores": 1,
+  "actual_logical_cpus": 64,
+  "actual_affinity_cpus": 64,
+  "runtime_seconds": 0.021013,
+  "seeds": [],
+  "proof_nodes": 5,
+  "forward_result": "d_replay <= d_standard",
+  "reverse_result": "d_standard <= d_replay",
+  "optimal_complexity_result": "d_replay = d_standard",
+  "verdict": "VERIFIED"
+}

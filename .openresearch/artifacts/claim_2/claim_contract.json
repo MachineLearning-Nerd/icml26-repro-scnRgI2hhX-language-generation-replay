@@ -1,0 +1,8 @@
+{
+  "claim_id": "claim_2",
+  "paper_statement": "A countable UUS class is non-uniformly generatable without replay but not with replay.",
+  "source_numbering": {"judge": "Theorem 4.1", "arxiv_v2": "Theorem 5.1"},
+  "domain": "all integers",
+  "quantifiers": "every candidate replay generator and arbitrary finite target thresholds d and m",
+  "acceptance": ["prove countability and UUS", "construct a standard generator", "prove the shared replay trace legal", "eliminate arbitrary d,m symbolically", "independent checker and rejecting no-replay control"]
+}

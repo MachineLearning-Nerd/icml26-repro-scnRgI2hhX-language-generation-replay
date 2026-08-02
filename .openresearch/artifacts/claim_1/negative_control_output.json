@@ -1,0 +1,1 @@
+{"source_run_id":"eebaedd5-f831-42f2-b21c-98931b550467","mutation":"burn-in emits arbitrary outsider instead of x1","exit_code":1,"failed_obligations":["burn_in_output_equals_x1","pre_threshold_replays_stay_in_support","post_threshold_generator_receives_only_target_support","post_threshold_outputs_are_supported_and_fresh"],"verdict":"REJECTED"}
