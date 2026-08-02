@@ -8,7 +8,7 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
-FIXED_COMMAND = "uv sync --frozen --no-dev && uv run --no-sync python repro/src/verify.py && uv run --no-sync python repro/src/publication_gate.py"
+FIXED_COMMAND = "uv sync --frozen --no-dev && uv run --no-sync python repro/src/check_lean_certificate.py && uv run --no-sync python repro/src/verify.py && uv run --no-sync python repro/src/publication_gate.py"
 verdict = json.loads((ROOT / "outputs" / "verdict.json").read_text())
 claims = verdict["claims"]
 required = {
@@ -32,6 +32,14 @@ assert verdict["exact_claims"]["claim_2_countable_nonuniform_separation"]["verdi
 assert verdict["exact_claims"]["claim_3_wp_countable_limit_generation"]["verdict"] == "VERIFIED"
 assert verdict["exact_claims"]["claim_4_uncountable_limit_separation"]["verdict"] == "VERIFIED"
 assert verdict["exact_claims"]["claim_5_proper_membership_query_lower_bound"]["verdict"] == "VERIFIED"
+assert verdict["lean_certificate"]["main_compile_succeeded"] is True
+assert verdict["lean_certificate"]["forbidden_proof_escapes_absent"] is True
+assert all(
+    row["compile_failed_as_required"]
+    for row in verdict["lean_certificate"]["negative_controls"].values()
+)
+assert (ROOT / "repro" / "formal" / "ReplayCore.lean").is_file()
+assert (ROOT / "repro" / "src" / "check_lean_certificate.py").is_file()
 
 artifact_names = {
     "claim_contract.json",
@@ -52,15 +60,30 @@ for claim_number in range(1, 7):
     page_text = page.read_text()
     assert "VERIFIED" in page_text
     assert FIXED_COMMAND in page_text
-    assert "Raw result" in page_text or "Structural raw result" in page_text
+    assert "```lean" in page_text
+    assert "https://huggingface.co/spaces/DineshAI/scnRgI2hhX/blob/main/" in page_text
     assert "../../../../" not in page_text
 
 logbook = json.loads((ROOT / ".trackio" / "logbook" / "logbook.json").read_text())
 assert logbook["space_id"] == "DineshAI/scnRgI2hhX"
 assert logbook["paper"] == "2603.11784"
-assert logbook["root"]["children"][0]["slug"] == "visibility-matrix"
+index = (ROOT / ".trackio" / "logbook" / "pages" / "index.md").read_text()
+assert index.startswith("# Reproduction: Language Generation with Replay: A Learning-Theoretic View of Model Collapse\n")
+assert [child["slug"] for child in logbook["root"]["children"]] == [
+    "executive-summary",
+    "claim-1-current",
+    "claim-2-current",
+    "claim-3-current",
+    "claim-4-current",
+    "claim-5-current",
+    "claim-6-current",
+    "conclusion",
+]
+executive = (ROOT / ".trackio" / "logbook" / "pages" / "executive-summary" / "page.md").read_text()
+assert '"pinned":true' in executive and "poster_embed.html" in executive
+assert (ROOT / ".trackio" / "logbook" / "poster_embed.html").is_file()
+assert (ROOT / ".trackio" / "logbook" / "pages" / "conclusion" / "page.md").is_file()
 matrix = (ROOT / ".trackio" / "logbook" / "pages" / "visibility-matrix" / "page.md").read_text()
-assert matrix.count("| Candidate VERIFIED;") == 6
 assert all(f"| {claim_number} |" in matrix for claim_number in range(1, 7))
 assert "../../../../" not in matrix
 historical = (ROOT / ".trackio" / "logbook" / "pages" / "historical-rejected-baseline" / "page.md").read_text()
@@ -78,7 +101,7 @@ assert "release/upload-allowlist.txt" in allowlist
 assert all(not Path(relative).is_absolute() and ".." not in Path(relative).parts for relative in allowlist)
 assert json.loads((ROOT / "release" / "evaluator-blind-review.json").read_text())["status"] == "PASS"
 
-text_suffixes = {".md", ".py", ".json", ".toml", ".lock", ".txt", ".svg"}
+text_suffixes = {".md", ".py", ".json", ".lean", ".toml", ".lock", ".txt", ".svg"}
 secret_markers = ("HF_" + "TOKEN=", "HUGGING_FACE_HUB_" + "TOKEN=", "github_" + "pat_", "sk-" + "proj-")
 for path in ROOT.rglob("*"):
     if path.is_file() and path.suffix in text_suffixes and ".venv" not in path.parts and ".git" not in path.parts:
@@ -191,6 +214,8 @@ gate = {
         "primary_source_audit_present": True,
         "theory_scope_limitation_explicit": True,
         "evaluator_visibility_matrix_complete": True,
+        "lean_certificate_and_mutations_passed": True,
+        "canonical_page_order_and_pinned_poster": True,
         "historical_baseline_demoted": True,
         "release_report_and_notebook_present": True,
         "secret_marker_scan_passed": True,

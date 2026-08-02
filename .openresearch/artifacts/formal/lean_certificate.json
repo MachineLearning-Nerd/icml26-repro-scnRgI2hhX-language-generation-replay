@@ -1,0 +1,47 @@
+{
+  "certificate": "repro/formal/ReplayCore.lean",
+  "certificate_sha256": "b15a2652b1513bc30897b64b27a64e5009c8e3640836dc24a45fe8c539d67fd3",
+  "domain": "all quantified List/Nat/Int values; no finite test window",
+  "forbidden_proof_escapes_absent": true,
+  "lean_version": "Lean (version 4.32.0, arm64-apple-darwin24.6.0, commit 8c9756b28d64dab099da31a4c09229a9e6a2ef35, Release)",
+  "main_compile_succeeded": true,
+  "negative_controls": {
+    "remove_h2plus_exception": {
+      "compile_failed_as_required": true,
+      "returncode_nonzero": true
+    },
+    "remove_hfinite_upper_bound": {
+      "compile_failed_as_required": true,
+      "returncode_nonzero": true
+    }
+  },
+  "theorems": [
+    "replay_support_closure",
+    "converted_generator_safe",
+    "converted_generator_same_threshold",
+    "criticality_monotone_in_prefix",
+    "sure_observation_is_target",
+    "finite_exclusion_cannot_block_uus",
+    "infinite_or_eventually_never",
+    "proper_diagonalization_dichotomy",
+    "withheld_phase_outputs_force_infinite_errors",
+    "countable_intersection_exact",
+    "countable_intersection_exhausted",
+    "plus_intersection_exact",
+    "minus_intersection_exact",
+    "minus_replays_legal",
+    "plus_replays_legal",
+    "h1Minus_not_subset_plus_intersection",
+    "h2Minus_not_subset_plus_intersection",
+    "h1Plus_not_subset_plus_intersection",
+    "h2Plus_not_subset_plus_intersection",
+    "h1Minus_not_subset_minus_intersection",
+    "h2Minus_not_subset_minus_intersection",
+    "h1Plus_not_subset_minus_intersection",
+    "h2Plus_not_subset_minus_intersection",
+    "common_plus_halfline_is_subset",
+    "common_minus_halfline_is_subset",
+    "every_first_output_has_ambiguous_targets",
+    "cantor_diagonal_not_enumerable"
+  ]
+}

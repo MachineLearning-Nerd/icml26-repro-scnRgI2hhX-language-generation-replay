@@ -1,32 +1,63 @@
-# Claim 2 — current exact verification
+# Claim 2 — countable non-uniform separation
 
-## Exact claim and candidate verdict
+## Claim and result
 
-**VERIFIED (candidate, not a live judge result).** Theorem 4.1 (arXiv v2 Theorem 5.1) constructs the countable UUS class `H={h_infinity} union {h_n}` over all integers. It is non-uniformly generatable without replay but not with replay.
+**VERIFIED by an arbitrary-threshold construction audit plus Lean.** Prompt
+Theorem 4.1 (arXiv v2 Theorem 5.1) constructs the countable UUS class
+`{h∞} ∪ {h_n : n ∈ N}`, which is non-uniformly generatable without replay but
+not with replay.
 
-## Exact evidence
+The supports are represented exactly over all integers:
 
-The standard side uses an explicit generator, not only the general countable-class theorem: emit fresh positives until a negative input appears, then fresh negatives. Its thresholds are 1 for `h_infinity` and `n+1` for `h_n`.
+```lean
+def hInf (x : Int) : Prop := 1 ≤ x
+def hFinite (d x : Int) : Prop :=
+  (1 ≤ x ∧ x ≤ d) ∨ x < 0
 
-For the replay lower bound, the certificate retains symbolic arbitrary thresholds `d` and `m`. The adversary presents `1,...,d` and then replays every output. The `h_infinity` guarantee forces fresh naturals and unbounded distinct count. At `T=max(d,m)`, the same trace also activates `h_d`; both targets require a fresh output in their intersection `{1,...,d}`, already exhausted by the initial prefix. The independent checker validates this contradiction without a finite `d` sweep.
+theorem countable_intersection_exact (d x : Int) :
+    hInf x ∧ hFinite d x ↔ 1 ≤ x ∧ x ≤ d := by
+  simp only [hInf, hFinite]
+  constructor
+  · rintro ⟨hx, hfd⟩
+    rcases hfd with hfd | hneg
+    · exact hfd
+    · omega
+  · rintro h
+    exact ⟨h.1, Or.inl h⟩
+```
 
-The negative control removes replay legality. The shared trace then ceases to be valid for `h_d`, and the verifier exits 1.
+For arbitrary replay thresholds `d` and `m`, the adversary presents
+`1,…,d`, then feeds back every output. Correctness for `h∞` forces fresh
+naturals and therefore unbounded distinct count. The same history is legal for
+`h_d`; after its finite threshold, a simultaneous output must be fresh and in
+`supp(h∞) ∩ supp(h_d) = {1,…,d}`. Lean checks that exact quantified
+intersection and that no point above `d` belongs to it. The initial prefix has
+already exhausted it, yielding the contradiction.
 
-Fixed command: `uv sync --frozen --no-dev && uv run --no-sync python repro/src/verify.py && uv run --no-sync python repro/src/publication_gate.py`
+The standard side uses the explicit paper-compatible rule: output a fresh
+positive until a negative observation appears, then a fresh negative. Threshold
+`1` works for `h∞`; `n+1` distinct supported observations force a negative
+for `h_n` by pigeonhole, after which fresh negatives remain supported.
 
-HF run `c89d634b-4039-4d14-aba4-495b7c5b68cf` at revision
-`2324dcec8bc1867501818e5df21aff90558baebe` reported 64 logical/affinity CPUs and
-0.025948 s verifier runtime. It was deterministic with no seeds.
+## Controls and scope
 
-- [Raw result](./.openresearch/artifacts/claim_2/raw_result.json)
-- [Checker output](./.openresearch/artifacts/claim_2/checker_output.json)
-- [Negative-control output](./.openresearch/artifacts/claim_2/negative_control_output.json)
-- [Claim contract](./.openresearch/artifacts/claim_2/claim_contract.json)
-- [Source audit](./.openresearch/artifacts/claim_2/source_audit.md)
-- [Exact commands](./.openresearch/artifacts/claim_2/commands.txt)
-- [Proof source](./repro/src/c2_proof.py)
-- [Independent checker source](./repro/src/c2_checker.py)
-- [Method](./.openresearch/artifacts/claim_2/method.md)
-- [Limitations](./.openresearch/artifacts/claim_2/limitations.md)
-- [Evaluator audit](./.openresearch/artifacts/claim_2/EVAL.md)
-- [Pinned environment](./uv.lock)
+Removing replay makes the shared `h_d` trace illegal and the Python proof
+audit exits nonzero. The Lean runner removes `hFinite`'s upper bound; the exact
+intersection theorem must then fail compilation. This is all-integer,
+arbitrary-threshold evidence, not the historical `d=1,…,12` sweep.
+
+Fixed cumulative command:
+
+```text
+uv sync --frozen --no-dev && uv run --no-sync python repro/src/check_lean_certificate.py && uv run --no-sync python repro/src/verify.py && uv run --no-sync python repro/src/publication_gate.py
+```
+
+Direct evidence: [Lean source](https://huggingface.co/spaces/DineshAI/scnRgI2hhX/blob/main/repro/formal/ReplayCore.lean),
+[Lean result](https://huggingface.co/spaces/DineshAI/scnRgI2hhX/blob/main/.openresearch/artifacts/formal/lean_certificate.json),
+[arbitrary-threshold audit](https://huggingface.co/spaces/DineshAI/scnRgI2hhX/blob/main/repro/src/c2_proof.py),
+[independent checker](https://huggingface.co/spaces/DineshAI/scnRgI2hhX/blob/main/repro/src/c2_checker.py),
+[raw result](https://huggingface.co/spaces/DineshAI/scnRgI2hhX/blob/main/.openresearch/artifacts/claim_2/raw_result.json),
+[source audit](https://huggingface.co/spaces/DineshAI/scnRgI2hhX/blob/main/.openresearch/artifacts/claim_2/source_audit.md), and
+[paper v2](https://arxiv.org/html/2603.11784v2).
+
+Deterministic local CPU; no seeds, GPU, paid job, or truncated domain.

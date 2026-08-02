@@ -8,88 +8,103 @@
     "icml2026-repro",
     "paper-scnRgI2hhX",
     "theory",
-    "replay"
+    "replay",
+    "lean4"
   ],
-  "updated_at": "2026-08-02T00:00:00+00:00",
+  "updated_at": "2026-08-03T00:40:00+00:00",
   "root": {
     "slug": "index",
     "title": "Repro - Language Generation with Replay",
     "file": "pages/index.md",
     "children": [
       {
-        "slug": "visibility-matrix",
-        "title": "Start here — evaluator-visible evidence matrix",
-        "file": "pages/visibility-matrix/page.md",
-        "children": []
-      },
-      {
-        "slug": "release-report",
-        "title": "Candidate release report and score forecast",
-        "file": "pages/release-report/page.md",
-        "children": []
-      },
-      {
-        "slug": "claim-5-current",
-        "title": "Current verification — Claim 5 universal MQ lower bound",
-        "file": "pages/claim-5-current/page.md",
-        "children": []
-      },
-      {
-        "slug": "claim-4-current",
-        "title": "Current verification — Claim 4 infinite diagonalization",
-        "file": "pages/claim-4-current/page.md",
-        "children": []
-      },
-      {
-        "slug": "claim-3-current",
-        "title": "Current verification — Claim 3 universal WP proof",
-        "file": "pages/claim-3-current/page.md",
-        "children": []
-      },
-      {
-        "slug": "claim-2-current",
-        "title": "Current verification — Claim 2 arbitrary thresholds",
-        "file": "pages/claim-2-current/page.md",
-        "children": []
+        "slug": "executive-summary",
+        "title": "Executive summary",
+        "file": "pages/executive-summary/page.md",
+        "children": [
+          {
+            "slug": "visibility-matrix",
+            "title": "Retained evaluator evidence matrix",
+            "file": "pages/visibility-matrix/page.md",
+            "children": []
+          },
+          {
+            "slug": "release-report",
+            "title": "Retained candidate release report",
+            "file": "pages/release-report/page.md",
+            "children": []
+          },
+          {
+            "slug": "overview",
+            "title": "Retained overview",
+            "file": "pages/overview/page.md",
+            "children": []
+          },
+          {
+            "slug": "claims",
+            "title": "Retained claims index",
+            "file": "pages/claims/page.md",
+            "children": []
+          },
+          {
+            "slug": "evidence",
+            "title": "Retained evidence index",
+            "file": "pages/evidence/page.md",
+            "children": []
+          },
+          {
+            "slug": "historical-rejected-baseline",
+            "title": "Historical rejected baseline",
+            "file": "pages/historical-rejected-baseline/page.md",
+            "children": []
+          }
+        ]
       },
       {
         "slug": "claim-1-current",
-        "title": "Current verification — Claim 1 exact reduction",
+        "title": "Claim 1 — uniform equivalence",
         "file": "pages/claim-1-current/page.md",
         "children": []
       },
       {
+        "slug": "claim-2-current",
+        "title": "Claim 2 — countable separation",
+        "file": "pages/claim-2-current/page.md",
+        "children": []
+      },
+      {
+        "slug": "claim-3-current",
+        "title": "Claim 3 — Witness Protection",
+        "file": "pages/claim-3-current/page.md",
+        "children": []
+      },
+      {
+        "slug": "claim-4-current",
+        "title": "Claim 4 — uncountable separation",
+        "file": "pages/claim-4-current/page.md",
+        "children": []
+      },
+      {
+        "slug": "claim-5-current",
+        "title": "Claim 5 — MQ lower bound",
+        "file": "pages/claim-5-current/page.md",
+        "children": []
+      },
+      {
         "slug": "claim-6-current",
-        "title": "Claim 6 — current exact verification",
+        "title": "Claim 6 — finite replay hardness",
         "file": "pages/claim-6-current/page.md",
         "children": []
       },
       {
-        "slug": "overview",
-        "title": "Overview",
-        "file": "pages/overview/page.md",
-        "children": []
-      },
-      {
-        "slug": "claims",
-        "title": "Claims",
-        "file": "pages/claims/page.md",
-        "children": []
-      },
-      {
-        "slug": "evidence",
-        "title": "Evidence",
-        "file": "pages/evidence/page.md",
-        "children": []
-      },
-      {
-        "slug": "historical-rejected-baseline",
-        "title": "Historical rejected baseline",
-        "file": "pages/historical-rejected-baseline/page.md",
+        "slug": "conclusion",
+        "title": "Conclusion",
+        "file": "pages/conclusion/page.md",
         "children": []
       }
     ]
   },
-  "agent_view_tokens": 876,
-  "revision": "1785325655042553967"
+  "agent_view_tokens": 1900,
+  "revision": "2026080300400000000"
 }
+

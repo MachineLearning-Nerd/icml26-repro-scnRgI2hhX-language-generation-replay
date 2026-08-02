@@ -11,7 +11,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 COPY_DIRS = ("repro", "reports", "notebooks", "docs", "release")
 COPY_FILES = (".python-version", "pyproject.toml", "uv.lock")
-TEXT_SUFFIXES = {"", ".css", ".html", ".js", ".json", ".lock", ".md", ".py", ".sha256", ".svg", ".toml", ".txt"}
+TEXT_SUFFIXES = {"", ".css", ".html", ".js", ".json", ".lean", ".lock", ".md", ".py", ".sha256", ".svg", ".toml", ".txt"}
 
 
 def digest(path: Path) -> str:
@@ -32,7 +32,7 @@ def main() -> None:
     assert judged.is_dir()
     assert not candidate.exists(), "candidate directory must be fresh"
 
-    shutil.copytree(judged, candidate, ignore=shutil.ignore_patterns(".git"))
+    shutil.copytree(judged, candidate, ignore=shutil.ignore_patterns(".git", ".cache"))
     copy_tree(ROOT / ".trackio" / "logbook", candidate)
     copy_tree(ROOT / ".openresearch" / "artifacts", candidate / ".openresearch" / "artifacts")
     for relative in COPY_DIRS:
@@ -41,11 +41,23 @@ def main() -> None:
         shutil.copy2(ROOT / relative, candidate / relative)
     shutil.copy2(ROOT / "release" / "space-README.md", candidate / "README.md")
 
-    protected = sorted(path.relative_to(judged).as_posix() for path in judged.rglob("*") if path.is_file() and ".git" not in path.parts)
+    protected = sorted(
+        path.relative_to(judged).as_posix()
+        for path in judged.rglob("*")
+        if path.is_file() and ".git" not in path.parts and ".cache" not in path.parts
+    )
     candidate_paths = sorted(path.relative_to(candidate).as_posix() for path in candidate.rglob("*") if path.is_file())
     assert set(protected) <= set(candidate_paths)
 
-    immutable = set(protected) - {"README.md", "logbook.json", "pages/index.md"}
+    mutable = {
+        "README.md",
+        "logbook.json",
+        "pages/index.md",
+        "pages/visibility-matrix/page.md",
+        "pages/release-report/page.md",
+        *(f"pages/claim-{claim}-current/page.md" for claim in range(1, 7)),
+    }
+    immutable = set(protected) - mutable
     for relative in immutable:
         if relative.startswith("pages/") or relative.endswith((".css", ".html", ".js", ".png", ".svg")):
             assert digest(judged / relative) == digest(candidate / relative), relative

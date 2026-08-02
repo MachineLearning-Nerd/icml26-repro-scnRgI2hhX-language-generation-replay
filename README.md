@@ -1,44 +1,32 @@
-# Reproduction: Language Generation with Replay
+---
+title: "Repro - Language Generation with Replay"
+emoji: 🎯
+colorFrom: yellow
+colorTo: red
+sdk: static
+pinned: false
+tags:
+ - trackio
+ - trackio-logbook
+ - open-experiment
+ - icml2026-repro
+ - paper-scnRgI2hhX
+ - theory
+ - replay
+---
 
-[![Open in molab](https://marimo.io/molab-shield.svg)](https://molab.marimo.io/github/MachineLearning-Nerd/icml26-repro-scnRgI2hhX-language-generation-replay/blob/main/notebooks/replay_reproduction.py)
+# Repro - Language Generation with Replay
 
-This clean-room campaign tests all six universal theory claims in [arXiv:2603.11784](https://arxiv.org/abs/2603.11784). The previous live judge awarded **6/12** for finite toy checks. The candidate replaces those checks with symbolic proof certificates for arbitrary quantified variables, independent checkers, and mutation controls that must fail. All research computation ran on Hugging Face `cpu-upgrade` (64 logical CPUs reported, no GPU).
+An open experiment logbook, published with [Trackio](https://github.com/gradio-app/trackio).
 
-Paper result: six generation/replay theorems. Observed result: all six exact claim contracts pass; seven independent proof routes and seven negative controls pass their expected outcomes. This is a **candidate forecast, not a new judge score**. The custom proof-certificate kernel is auditable Python, not a general proof assistant, which remains the main review risk.
+## Current candidate evidence
 
-Published to the existing Space at revision [`de2f601022277cf2ab0efe03112c93405a41901f`](https://huggingface.co/spaces/DineshAI/scnRgI2hhX/commit/de2f601022277cf2ab0efe03112c93405a41901f). Status: **awaiting live judge**; the score remains 6/12 until a verdict is recorded.
+The live judged score remains **6/12**. Six source-anchored proof audits now expose their code directly, with Lean-checked universal cores and fail-closed mutations. This is candidate evidence, not a new judge result.
 
-- [Illustrated technical report](reports/replay-reproduction/report.md)
-- [Self-contained marimo tutorial](notebooks/replay_reproduction.py)
-- [Evaluator-visible evidence matrix](pages/visibility-matrix/page.md)
+- [Start with the pinned executive summary](#/executive-summary)
+- [Read Claim 1](#/claim-1-current) through [Claim 6](#/claim-6-current)
+- [Inspect the retained evidence matrix](#/visibility-matrix)
+- [Open the illustrated technical report](reports/replay-reproduction/report.md)
+- [Inspect the self-contained marimo notebook](notebooks/replay_reproduction.py)
 
-Run the fixed reproduction command:
-
-```bash
-uv sync --frozen --no-dev && uv run --no-sync python repro/src/verify.py && uv run --no-sync python repro/src/publication_gate.py
-```
-
-## Experiment log
-
-The exact run command is invariant across the tree.
-
-| Branch / experiment | Purpose or change | Exact run command | Assessment / outcome | Compute |
-| --- | --- | --- | --- | --- |
-| `main` | Publication surface | Not run as an experiment (publication surface) | Previous live artifact; presentation target | — |
-| [`orx/validated-finite-construction-baseline`](https://github.com/MachineLearning-Nerd/icml26-repro-scnRgI2hhX-language-generation-replay/tree/orx/validated-finite-construction-baseline) | Freeze judged finite baseline | `uv sync --frozen --no-dev && uv run --no-sync python repro/src/verify.py && uv run --no-sync python repro/src/publication_gate.py` | TOY baseline reproduced | HF `cpu-upgrade`, 64 CPUs, 21 s |
-| [`orx/claim-6-cumulative-proof-evidence`](https://github.com/MachineLearning-Nerd/icml26-repro-scnRgI2hhX-language-generation-replay/tree/orx/claim-6-cumulative-proof-evidence) | Exact all-integer Claim 6 certificate, two routes | `uv sync --frozen --no-dev && uv run --no-sync python repro/src/verify.py && uv run --no-sync python repro/src/publication_gate.py` | Candidate VERIFIED | HF `cpu-upgrade`, 64 CPUs, 21 s cumulative run |
-| [`orx/claim-1-exact-reduction-certificate`](https://github.com/MachineLearning-Nerd/icml26-repro-scnRgI2hhX-language-generation-replay/tree/orx/claim-1-exact-reduction-certificate) | Arbitrary-`d` replay reduction | `uv sync --frozen --no-dev && uv run --no-sync python repro/src/verify.py && uv run --no-sync python repro/src/publication_gate.py` | Candidate VERIFIED | HF `cpu-upgrade`, 64 CPUs, 21 s |
-| [`orx/claim-2-arbitrary-threshold-separation`](https://github.com/MachineLearning-Nerd/icml26-repro-scnRgI2hhX-language-generation-replay/tree/orx/claim-2-arbitrary-threshold-separation) | Symbolic threshold contradiction | `uv sync --frozen --no-dev && uv run --no-sync python repro/src/verify.py && uv run --no-sync python repro/src/publication_gate.py` | Candidate VERIFIED | HF `cpu-upgrade`, 64 CPUs, 21 s |
-| [`orx/claim-3-universal-witness-protection-proof`](https://github.com/MachineLearning-Nerd/icml26-repro-scnRgI2hhX-language-generation-replay/tree/orx/claim-3-universal-witness-protection-proof) | Universal Witness Protection obligations | `uv sync --frozen --no-dev && uv run --no-sync python repro/src/verify.py && uv run --no-sync python repro/src/publication_gate.py` | Candidate VERIFIED | HF `cpu-upgrade`, 64 CPUs, 21 s |
-| [`orx/claim-4-infinite-diagonalization-certificate`](https://github.com/MachineLearning-Nerd/icml26-repro-scnRgI2hhX-language-generation-replay/tree/orx/claim-4-infinite-diagonalization-certificate) | All-phase diagonalization | `uv sync --frozen --no-dev && uv run --no-sync python repro/src/verify.py && uv run --no-sync python repro/src/publication_gate.py` | Candidate VERIFIED | HF `cpu-upgrade`, 64 CPUs, 21 s |
-| [`orx/claim-5-universal-mq-lower-bound-certificate`](https://github.com/MachineLearning-Nerd/icml26-repro-scnRgI2hhX-language-generation-replay/tree/orx/claim-5-universal-mq-lower-bound-certificate) | Universal MQ lower-bound dichotomy | `uv sync --frozen --no-dev && uv run --no-sync python repro/src/verify.py && uv run --no-sync python repro/src/publication_gate.py` | Candidate VERIFIED | HF `cpu-upgrade`, 64 CPUs, 21 s |
-| [`orx/evaluator-visible-release-candidate`](https://github.com/MachineLearning-Nerd/icml26-repro-scnRgI2hhX-language-generation-replay/tree/orx/evaluator-visible-release-candidate) | Cumulative regression and publication gates | `uv sync --frozen --no-dev && uv run --no-sync python repro/src/verify.py && uv run --no-sync python repro/src/publication_gate.py` | Candidate VERIFIED; visibility gate PASS | HF `cpu-upgrade`, 64 CPUs, 21 s |
-| [`orx/space-relative-evidence-and-release-audit`](https://github.com/MachineLearning-Nerd/icml26-repro-scnRgI2hhX-language-generation-replay/tree/orx/space-relative-evidence-and-release-audit) | Protected-history subset, two-pass blind traversal, exact upload manifest | `uv sync --frozen --no-dev && uv run --no-sync python repro/src/verify.py && uv run --no-sync python repro/src/publication_gate.py` | Winning branch; all release gates PASS | HF `cpu-upgrade`, 64 CPUs, 21 s |
-
-## Environment
-
-Python 3.12.11 and all inputs are pinned by `pyproject.toml`, `.python-version`, and `uv.lock`. The verifier is deterministic and uses no random seeds. The one repository-level `.venv` is reused; no claim uses a command-line knob or separate environment.
-
-## Historical material
-
-The original finite construction audit is preserved in `RESULTS.md` and the historical logbook pages. It is not the current evidence for a universal theorem.
+The new Lean route ran on local CPU; the retained Python evidence ran on Hugging Face `cpu-upgrade`. No GPU was used. Historical evidence remains preserved and is explicitly labeled **Historical rejected baseline**.

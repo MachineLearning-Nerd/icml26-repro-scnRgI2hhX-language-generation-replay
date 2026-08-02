@@ -1,3 +1,3 @@
 # Limitations and deviations
 
-This is a machine-checked proof reconstruction, not a proof-assistant kernel. Its trusted base includes power-set uncountability, stabilization of a bounded monotone marker index, counterfactual phase termination, and natural-number induction across all phases. It does not treat a finite phase prefix as the theorem.
+Lean kernel-checks Cantor non-enumerability and that one withheld invalid output per natural phase forces errors arbitrarily late. Marker stabilization, counterfactual phase termination, and actual-target membership remain source-audited. No finite phase prefix is treated as the theorem.

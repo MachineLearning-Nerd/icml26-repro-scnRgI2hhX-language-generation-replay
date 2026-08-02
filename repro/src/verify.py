@@ -329,6 +329,15 @@ def main() -> None:
         "claim_6_finite_proper_replay_hardness": verify_c6_exact(),
         "claim_6_independent_cell_route": certify_c6_cells(),
     }
+    lean_certificate = json.loads(
+        (ROOT / ".openresearch" / "artifacts" / "formal" / "lean_certificate.json").read_text()
+    )
+    assert lean_certificate["main_compile_succeeded"] is True
+    assert lean_certificate["forbidden_proof_escapes_absent"] is True
+    assert all(
+        row["compile_failed_as_required"]
+        for row in lean_certificate["negative_controls"].values()
+    )
     assert exact_claims["claim_6_independent_cell_route"]["verdict"] == "VERIFIED"
     assert exact_claims["claim_1_uniform_replay_equivalence"]["verdict"] == "VERIFIED"
     assert exact_claims["claim_2_countable_nonuniform_separation"]["verdict"] == "VERIFIED"
@@ -355,7 +364,12 @@ def main() -> None:
         "all_claims_passed": all(row["passed"] for row in claims.values()),
         "claims": claims,
         "exact_claims": exact_claims,
-        "limitations": "Executable checks validate stated construction invariants and negative controls. Universal theorem quantifiers remain justified by the linked primary-source proofs, not by finite execution alone.",
+        "lean_certificate": lean_certificate,
+        "limitations": (
+            "Lean checks the central quantified mechanisms without proof escapes or finite windows; "
+            "the longer theorem compositions remain source-anchored proof audits rather than a complete "
+            "formalization of every paper definition."
+        ),
     }
     result["run_metadata"]["runtime_seconds"] = round(time.perf_counter() - started, 6)
     (OUT / "verdict.json").write_text(json.dumps(result, indent=2, sort_keys=True) + "\n")

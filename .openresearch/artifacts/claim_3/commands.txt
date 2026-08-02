@@ -1,5 +1,5 @@
 Fixed reproduction command:
-uv sync --frozen --no-dev && uv run --no-sync python repro/src/verify.py && uv run --no-sync python repro/src/publication_gate.py
+uv sync --frozen --no-dev && uv run --no-sync python repro/src/check_lean_certificate.py && uv run --no-sync python repro/src/verify.py && uv run --no-sync python repro/src/publication_gate.py
 
 Launch command:
 orx exp run bad82a73-bba7-402a-a1b6-0c0dea30f142 --flavor cpu-upgrade --timeout 20m --image ghcr.io/astral-sh/uv:0.8.11-python3.12-bookworm-slim

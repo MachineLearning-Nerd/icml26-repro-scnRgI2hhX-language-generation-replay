@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>Language Generation with Replay — proof audit</title>
+<style>
+:root { --ink:#15243b; --navy:#173f64; --blue:#246b98; --ice:#e9f7f7; --gold:#d08a24; --paper:#fff; --line:#bfd0dd; --muted:#526477; }
+* { box-sizing:border-box; }
+body { margin:0; color:var(--ink); background:var(--ice); font-family:Inter,"Source Sans 3",Arial,sans-serif; }
+.poster { min-height:620px; padding:30px 36px 27px; border-top:14px solid var(--navy); background:var(--paper); }
+.eyebrow { color:var(--blue); font-size:13px; font-weight:800; letter-spacing:.14em; text-transform:uppercase; }
+h1 { max-width:1120px; margin:9px 0 7px; font-size:36px; line-height:1.04; }
+.subtitle { margin:0; color:var(--muted); font-size:17px; line-height:1.35; }
+.metrics { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin:22px 0 16px; }
+.metric { min-height:91px; padding:15px 17px; color:var(--paper); background:var(--navy); border-bottom:5px solid var(--gold); border-radius:9px; font-size:13px; line-height:1.3; }
+.metric b { display:block; margin-bottom:3px; font-size:26px; line-height:1.05; }
+.cards { display:grid; grid-template-columns:repeat(3,1fr); gap:13px; }
+.card { min-height:180px; padding:17px 18px; color:var(--ink); background:#fffaf0; border:1px solid var(--line); border-radius:9px; text-decoration:none; line-height:1.42; }
+.card strong { display:block; margin-bottom:7px; color:var(--navy); font-size:18px; line-height:1.15; }
+.card em { color:var(--blue); font-style:normal; font-weight:800; }
+.pill { display:inline-block; margin-top:10px; padding:5px 9px; color:var(--navy); background:var(--ice); border-radius:99px; font-size:11px; font-weight:800; }
+.foot { margin-top:18px; color:var(--muted); font-size:12px; line-height:1.35; }
+@media (max-width:850px) { .metrics { grid-template-columns:repeat(2,1fr); } .cards { grid-template-columns:1fr; } h1 { font-size:29px; } }
+</style>
+</head>
+<body>
+<main class="poster">
+  <div class="eyebrow">ICML 2026 · CPU theory reproduction</div>
+  <h1>Universal replay arguments become visible, checked certificates</h1>
+  <p class="subtitle">The preserved 6/12 baseline hid its proof scripts behind broken relative links. Every claim now exposes code inline, with Lean-checked cores and fail-closed mutations.</p>
+  <section class="metrics">
+    <div class="metric"><b>27</b>named Lean theorems over arbitrary lists, naturals, and integers</div>
+    <div class="metric"><b>0 escapes</b>no sorry, axioms, unsafe declarations, or finite windows</div>
+    <div class="metric"><b>2 / 2 fail</b>theorem-breaking Lean mutations rejected as required</div>
+    <div class="metric"><b>USD 0</b>local deterministic CPU; no GPU or paid job</div>
+  </section>
+  <section class="cards">
+    <a class="card" data-logbook-target="claim-1-current"><strong>Benign replay and strict separation</strong><em>Claims 1–2</em> check same-threshold support closure and the exact arbitrary-d intersection contradiction.<span class="pill">Uniform / non-uniform ↗</span></a>
+    <a class="card" data-logbook-target="claim-3-current"><strong>Infinite-limit mechanisms</strong><em>Claims 3–5</em> expose criticality monotonicity, phase errors, and the exhaustive proper-generator dichotomy.<span class="pill">Countable / uncountable ↗</span></a>
+    <a class="card" data-logbook-target="claim-6-current"><strong>Four hypotheses, all integers</strong><em>Claim 6</em> is exhausted three ways: Lean, exact predicates, and an independent unbounded-cell solver.<span class="pill">Exact finite-class hardness ↗</span></a>
+  </section>
+  <div class="foot">OpenReview scnRgI2hhX · arXiv 2603.11784v2 · prompt-to-v2 theorem mapping recorded · Lean 4.32.0 · six source audits · eight falsifying controls · deterministic local CPU.</div>
+</main>
+</body>
+</html>
+

@@ -9,7 +9,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 ALLOWLIST_PATH = "release/upload-allowlist.txt"
 MANIFEST_PATH = "release/candidate-manifest.sha256"
-TEXT_SUFFIXES = {"", ".css", ".html", ".js", ".json", ".lock", ".md", ".py", ".sha256", ".svg", ".toml", ".txt"}
+TEXT_SUFFIXES = {"", ".css", ".html", ".js", ".json", ".lean", ".lock", ".md", ".py", ".sha256", ".svg", ".toml", ".txt"}
 
 
 def digest(path: Path) -> str:

@@ -1,34 +1,63 @@
-# Claim 3 — current universal Witness Protection proof
+# Claim 3 — Witness Protection for countable classes
 
-## Exact claim and candidate verdict
+## Claim and result
 
-**VERIFIED (candidate, not a live judge result).** Theorem 5.1 (arXiv v2 Theorem 6.1) states that exact Algorithm 2, Witness Protection, is a computable membership-query-only generator for every countable UUS class under replay.
+**VERIFIED by a source-level three-lemma audit with checked cores.** Prompt
+Theorem 5.1 (arXiv v2 Theorem 6.1) gives a membership-query-only algorithm that
+generates in the limit every countable UUS class even with replay.
 
-## Proof-level evidence
+The reproduction transcribes Algorithm 2 and audits its three universal proof
+steps: per-round termination, eventual target criticality, and eventual valid
+fresh output. Unlike the historical three-hypothesis execution, the proof audit
+keeps target index `z`, round `t`, and prefix bound `m` symbolic.
 
-The current verifier checks the source's three universal lemmas and their composition for symbolic arbitrary target index `z`, round `t`, and prefix `m`:
+Lean checks three failure-prone mechanisms directly. A non-replay observation
+from an admissible stream must be a true target point; UUS supplies a supported
+point outside every finite exclusion; and criticality can only be lost as the
+finite prefix expands:
 
-1. Every round terminates: critical indices stabilize and the infinite support outgrows at most `2t+t^2` exclusions.
-2. The target eventually remains critical: each of finitely many earlier false candidates is evicted when its protected witness is enumerated.
-3. Outputs are eventually valid and fresh: critical inclusion transfers the chosen output to the target, while avoidance of the sure set and prior outputs excludes every seen point.
+```lean
+theorem criticality_monotone_in_prefix
+    (support : Nat → Nat → Prop) (sure priorOutputs : Nat → Prop)
+    (candidate small large : Nat) (hbound : small ≤ large)
+    (critical : Critical support sure priorOutputs candidate large) :
+    Critical support sure priorOutputs candidate small := by
+  constructor
+  · exact critical.1
+  · intro earlier hearlier hconsistent x hx hsupported hnew
+    exact critical.2 earlier hearlier hconsistent x
+      (Nat.le_trans hx hbound) hsupported hnew
+```
 
-All finite predicates use membership queries only. The independent checker validates the six-node proof DAG. The negative control disables witness protection; witness eviction and eventual criticality become unjustified, so the verifier exits 1.
+The full audit then follows the paper: the largest critical index stabilizes for
+each round because it ranges over a finite active set; at most `2t+t²` points
+are excluded; protected distinguishing witnesses cannot be generator outputs,
+so their eventual appearance makes them sure and permanently evicts each false
+earlier candidate. Only finitely many candidates precede the target's first
+index, giving a finite stabilization time. Critical inclusion transfers every
+later selected output to the target support, and avoidance of sure/prior-output
+sets makes it fresh.
 
-Fixed command: `uv sync --frozen --no-dev && uv run --no-sync python repro/src/verify.py && uv run --no-sync python repro/src/publication_gate.py`
+## Controls and formal boundary
 
-HF run `5966f711-13d1-4c71-bbd7-46b6488f60a3` at revision
-`a22f52d44466353c18177fc1fba306dea58a2c4e` reported 64 logical/affinity CPUs and
-0.023147 s verifier runtime. It was deterministic with no seeds.
+The negative control allows the algorithm to emit a distinguishing witness.
+Its later appearance can then be classified as replay, so eviction no longer
+follows and the audit exits nonzero. Lean does not reimplement the entire
+unbounded search loop; it kernel-checks the reusable logical cores while the
+longer termination/criticality composition is audited line-by-line against the
+paper source and independently checked as a proof DAG.
 
-- [Raw result](./.openresearch/artifacts/claim_3/raw_result.json)
-- [Checker output](./.openresearch/artifacts/claim_3/checker_output.json)
-- [Negative-control output](./.openresearch/artifacts/claim_3/negative_control_output.json)
-- [Claim contract](./.openresearch/artifacts/claim_3/claim_contract.json)
-- [Source audit](./.openresearch/artifacts/claim_3/source_audit.md)
-- [Exact commands](./.openresearch/artifacts/claim_3/commands.txt)
-- [Proof source](./repro/src/c3_proof.py)
-- [Independent checker source](./repro/src/c3_checker.py)
-- [Method](./.openresearch/artifacts/claim_3/method.md)
-- [Limitations](./.openresearch/artifacts/claim_3/limitations.md)
-- [Evaluator audit](./.openresearch/artifacts/claim_3/EVAL.md)
-- [Pinned environment](./uv.lock)
+Fixed cumulative command:
+
+```text
+uv sync --frozen --no-dev && uv run --no-sync python repro/src/check_lean_certificate.py && uv run --no-sync python repro/src/verify.py && uv run --no-sync python repro/src/publication_gate.py
+```
+
+Direct evidence: [Lean source](https://huggingface.co/spaces/DineshAI/scnRgI2hhX/blob/main/repro/formal/ReplayCore.lean),
+[full Witness Protection audit](https://huggingface.co/spaces/DineshAI/scnRgI2hhX/blob/main/repro/src/c3_proof.py),
+[independent checker](https://huggingface.co/spaces/DineshAI/scnRgI2hhX/blob/main/repro/src/c3_checker.py),
+[raw result](https://huggingface.co/spaces/DineshAI/scnRgI2hhX/blob/main/.openresearch/artifacts/claim_3/raw_result.json),
+[source audit](https://huggingface.co/spaces/DineshAI/scnRgI2hhX/blob/main/.openresearch/artifacts/claim_3/source_audit.md), and
+[paper v2](https://arxiv.org/html/2603.11784v2).
+
+Deterministic local CPU; no seeds, GPU, paid job, or single-class inference.

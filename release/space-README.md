@@ -21,11 +21,12 @@ An open experiment logbook, published with [Trackio](https://github.com/gradio-a
 
 ## Current candidate evidence
 
-The live judged score remains **6/12**. Six exact proof certificates now supersede the finite TOY baseline; this is candidate evidence, not a new judge result.
+The live judged score remains **6/12**. Six source-anchored proof audits now expose their code directly, with Lean-checked universal cores and fail-closed mutations. This is candidate evidence, not a new judge result.
 
-- [Start with the evaluator-visible evidence matrix](#/visibility-matrix)
-- [Read the candidate release report](#/release-report)
+- [Start with the pinned executive summary](#/executive-summary)
+- [Read Claim 1](#/claim-1-current) through [Claim 6](#/claim-6-current)
+- [Inspect the retained evidence matrix](#/visibility-matrix)
 - [Open the illustrated technical report](reports/replay-reproduction/report.md)
 - [Inspect the self-contained marimo notebook](notebooks/replay_reproduction.py)
 
-All scientific computation ran on Hugging Face `cpu-upgrade`; no GPU was used. Historical evidence remains preserved and is explicitly labeled **Historical rejected baseline**.
+The new Lean route ran on local CPU; the retained Python evidence ran on Hugging Face `cpu-upgrade`. No GPU was used. Historical evidence remains preserved and is explicitly labeled **Historical rejected baseline**.

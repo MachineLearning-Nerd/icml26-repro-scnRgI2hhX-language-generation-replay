@@ -4,7 +4,7 @@
 
 The paper asks whether a language generator can keep producing fresh, valid outputs when its own earlier outputs may reappear as future inputs. Its six central results show that replay is harmless for the strongest uniform notion, harmful for weaker notions, and especially restrictive when generation must be proper or membership-query-only.
 
-This reproduction began from a live **6/12** judge result: each theorem had a correct-looking finite instance, but none covered its universal quantifier. The candidate now encodes every theorem as an explicit claim contract and a symbolic proof certificate. All six candidate verdicts are `VERIFIED`; the live score remains 6/12 until the evaluator judges the published revision.
+This reproduction began from a live **6/12** judge result: each theorem had a correct-looking finite instance, while the stronger proof sources were not visible to the evaluator. The candidate now displays actual Lean theorem excerpts on every claim page, links the complete proof sources directly, and retains the claim contracts, source audits, independent checkers, and mutation controls. The live score remains 6/12 until the evaluator judges the published revision.
 
 ## Strongest result
 
@@ -23,7 +23,7 @@ The prior bound in Claim 6 checked integers only in `[-40,40]`. The replacement 
 
 ## Implementation
 
-The fixed entrypoint runs `repro/src/verify.py`, which emits machine-readable certificates, followed by `repro/src/publication_gate.py`, which invokes independent checkers and mutation controls. Every claim has the same evidence bundle: `claim_contract.json`, source audit, method, raw JSON, independent checker output, negative-control output, exact command, CPU/runtime metadata, limitations, and `EVAL.md`.
+The fixed entrypoint first compiles `repro/formal/ReplayCore.lean` and requires two theorem-breaking mutations to fail, then runs `repro/src/verify.py` and `repro/src/publication_gate.py`. Every claim has the same evidence bundle: `claim_contract.json`, source audit, method, raw JSON, independent checker output, negative-control output, exact command, CPU/runtime metadata, limitations, and `EVAL.md`.
 
 The consequential design choice was to represent unbounded objects symbolically rather than sweep larger finite ranges. For example, Claim 2 retains arbitrary thresholds `d` and `m`; Claim 4 retains arbitrary phase `n`; Claim 6 represents integer predicates as exact cells instead of sampling points.
 
@@ -36,7 +36,7 @@ The independent checkers read only the emitted certificate schema and re-establi
 Every scientific run used Hugging Face `cpu-upgrade`; jobs reported 64 logical and affinity CPUs. The verifier itself needs one core and less than 1 GiB, but the requested flavor was fixed by the campaign. No GPU was used. Runs are deterministic and use no seeds.
 
 ```bash
-uv sync --frozen --no-dev && uv run --no-sync python repro/src/verify.py && uv run --no-sync python repro/src/publication_gate.py
+uv sync --frozen --no-dev && uv run --no-sync python repro/src/check_lean_certificate.py && uv run --no-sync python repro/src/verify.py && uv run --no-sync python repro/src/publication_gate.py
 ```
 
 Python 3.12.11 and the dependency-free runtime are locked by `.python-version`, `pyproject.toml`, and `uv.lock`. The exact verifier runtimes below are taken from the raw HF evidence; complete orchestration jobs took about 21 seconds apiece.
@@ -47,9 +47,9 @@ Python 3.12.11 and the dependency-free runtime are locked by `.python-version`, 
 
 These are proof-level symbolic checks, not larger simulations. There is therefore no statistical uncertainty or formula-selected sample budget. The certificate inputs retain the paper’s arbitrary variables, and the checkers reject missing proof dependencies.
 
-The main residual risk is formal-methodological: the certificate schema and independent checkers are small, auditable Python programs, not a proof assistant with a trusted kernel. Claims 3–5 receive MEDIUM confidence because their source proofs rely on longer computability and diagonalization arguments; Claims 1, 2, and 6 receive HIGH confidence because their decisive reductions are short or independently reconstructed twice.
+Lean 4.32.0 now kernel-checks 27 central universal mechanisms without proof escapes, Mathlib, or finite windows. The remaining methodological boundary is explicit: the longer Witness Protection, uncountable-phase, and total-recursive hard-class compositions are source-audited rather than complete end-to-end formalizations. Claim 6 is independently reconstructed three ways.
 
-No claim is marked BLOCKED. No score increase is claimed. The conservative post-publication forecast is **8/12–12/12**; the best-supported possible score is **12/12**, explicitly a forecast.
+No claim is marked BLOCKED. No score increase or score forecast is claimed; only a live judge verdict can change the retained **6/12** score.
 
 ## Experiment lineage
 

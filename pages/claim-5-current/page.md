@@ -1,32 +1,65 @@
-# Claim 5 — current universal MQ lower-bound proof
+# Claim 5 — deterministic membership-query lower bound
 
-## Exact claim and candidate verdict
+## Claim and result
 
-**VERIFIED (candidate, not a live judge result).** Theorem 6.1 (arXiv v2 Theorem 7.1) states that no deterministic membership-query-only generator properly generates in the limit every countable class.
+**VERIFIED by a generator-indexed source audit with a checked exhaustive
+dichotomy.** Prompt Theorem 6.1 (arXiv v2 Theorem 7.1) says no deterministic
+membership-query-only generator can properly generate in the limit every
+countable hypothesis class.
 
-## Proof-level evidence
+The audit follows Algorithm 3 for an arbitrary deterministic computable
+generator. It checks that each instance column of `F(i,j)` is assigned once,
+the assigned columns are exactly an initial segment, and `J` is unbounded
+whether each round has finitely many queries or one round has infinitely many.
+This makes `F` total recursive. Universally supported fresh columns make every
+hypothesis support infinite, and the minimum-queue policy enumerates every
+queued point.
 
-The current certificate validates the full generator-indexed Algorithm 3 construction. It proves `F` total recursive even if the generator issues infinitely many queries in one round, proves every support infinite, and proves the minimum queue enumerates its limiting contents.
+Lean kernel-checks the exhaustive temporal split and its consequence:
 
-It then checks the exhaustive dichotomy for an arbitrary output sequence. If non-`h1` hypotheses appear infinitely often, the queue enumerates `h1` and each such output gets an exclusive point outside `h1`. If they appear only finitely often, the queue enumerates the final trap hypothesis and eventual `h1` always contains its omitted trap point. Both cases yield infinitely many errors.
+```lean
+theorem proper_diagonalization_dichotomy
+    (nonReference error : Nat → Prop)
+    (diagonalError : ∀ time, nonReference time → error time)
+    (finalTrapError : EventuallyNever nonReference →
+      ∃ after, ∀ time, after ≤ time → error time) :
+    InfinitelyOften error := by
+  rcases infinite_or_eventually_never nonReference with often | eventually
+  · intro after
+    rcases often after with ⟨time, htime, hnonref⟩
+    exact ⟨time, htime, diagonalError time hnonref⟩
+  · rcases finalTrapError eventually with ⟨start, herror⟩
+    intro after
+    let time := max after start
+    exact ⟨time, Nat.le_max_left _ _, herror time (Nat.le_max_right _ _)⟩
+```
 
-The independent checker validates all proof nodes. Removing the final trap destroys the second case and causes exit 1.
+If non-`h1` outputs occur infinitely often, every such output receives an
+exclusive diagonal point outside target `h1`, while the queue enumerates
+`supp(h1)`. Otherwise a final trap exists, the queue enumerates its hypothesis,
+and eventual `h1` always contains the trap point omitted by the target. Either
+case gives errors arbitrarily late.
 
-Fixed command: `uv sync --frozen --no-dev && uv run --no-sync python repro/src/verify.py && uv run --no-sync python repro/src/publication_gate.py`
+## Control and formal boundary
 
-HF run `9d904828-3252-4f26-a2a2-b10d40775567` at revision
-`5be61e11000cbb2ffddacc1ae6d95030b6c48284` reported 64 logical/affinity CPUs and
-0.017040 s verifier runtime. It was deterministic with no seeds.
+Removing the final trap destroys the eventually-`h1` branch and makes the
+Python proof audit fail. Lean checks that the two temporal cases are exhaustive
+and that the construction's two error implications prove infinitely many
+errors. Total recursiveness and queue/support equality remain explicit
+source-level invariants, not pretense that a finite sample covers arbitrary
+generators.
 
-- [Raw result](./.openresearch/artifacts/claim_5/raw_result.json)
-- [Checker output](./.openresearch/artifacts/claim_5/checker_output.json)
-- [Negative-control output](./.openresearch/artifacts/claim_5/negative_control_output.json)
-- [Claim contract](./.openresearch/artifacts/claim_5/claim_contract.json)
-- [Source audit](./.openresearch/artifacts/claim_5/source_audit.md)
-- [Exact commands](./.openresearch/artifacts/claim_5/commands.txt)
-- [Proof source](./repro/src/c5_proof.py)
-- [Independent checker source](./repro/src/c5_checker.py)
-- [Method](./.openresearch/artifacts/claim_5/method.md)
-- [Limitations](./.openresearch/artifacts/claim_5/limitations.md)
-- [Evaluator audit](./.openresearch/artifacts/claim_5/EVAL.md)
-- [Pinned environment](./uv.lock)
+Fixed cumulative command:
+
+```text
+uv sync --frozen --no-dev && uv run --no-sync python repro/src/check_lean_certificate.py && uv run --no-sync python repro/src/verify.py && uv run --no-sync python repro/src/publication_gate.py
+```
+
+Direct evidence: [Lean source](https://huggingface.co/spaces/DineshAI/scnRgI2hhX/blob/main/repro/formal/ReplayCore.lean),
+[generator-indexed proof audit](https://huggingface.co/spaces/DineshAI/scnRgI2hhX/blob/main/repro/src/c5_proof.py),
+[independent checker](https://huggingface.co/spaces/DineshAI/scnRgI2hhX/blob/main/repro/src/c5_checker.py),
+[raw result](https://huggingface.co/spaces/DineshAI/scnRgI2hhX/blob/main/.openresearch/artifacts/claim_5/raw_result.json),
+[source audit](https://huggingface.co/spaces/DineshAI/scnRgI2hhX/blob/main/.openresearch/artifacts/claim_5/source_audit.md), and
+[paper v2](https://arxiv.org/html/2603.11784v2).
+
+Deterministic local CPU; no seeds, GPU, paid job, or finite output-pattern claim.

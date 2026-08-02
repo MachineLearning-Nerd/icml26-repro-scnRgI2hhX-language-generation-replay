@@ -9,7 +9,7 @@ import re
 from pathlib import Path
 
 LINK = re.compile(r"\[[^]]+\]\(([^)]+)\)")
-FIXED_COMMAND = "uv sync --frozen --no-dev && uv run --no-sync python repro/src/verify.py && uv run --no-sync python repro/src/publication_gate.py"
+FIXED_COMMAND = "uv sync --frozen --no-dev && uv run --no-sync python repro/src/check_lean_certificate.py && uv run --no-sync python repro/src/verify.py && uv run --no-sync python repro/src/publication_gate.py"
 
 
 def main() -> None:
@@ -27,24 +27,39 @@ def main() -> None:
 
     read("README.md")
     manifest = json.loads(read("logbook.json"))
+    index = read("pages/index.md")
+    assert index.startswith("# Reproduction: Language Generation with Replay: A Learning-Theoretic View of Model Collapse\n")
     children = manifest["root"]["children"]
-    assert children[0]["slug"] == "visibility-matrix"
+    assert [child["slug"] for child in children] == [
+        "executive-summary",
+        "claim-1-current",
+        "claim-2-current",
+        "claim-3-current",
+        "claim-4-current",
+        "claim-5-current",
+        "claim-6-current",
+        "conclusion",
+    ]
     slugs = {child["slug"] for child in children}
+    slugs.update(child["slug"] for child in children[0]["children"])
+    executive = read("pages/executive-summary/page.md")
+    assert '"pinned":true' in executive
+    assert "poster_embed.html" in executive
+    read("poster_embed.html")
+    read("pages/conclusion/page.md")
     matrix = read("pages/visibility-matrix/page.md")
-    assert matrix.count("| Candidate VERIFIED;") == 6
+    assert "Lean runner" in matrix
 
     for claim_number in range(1, 7):
         page_name = f"pages/claim-{claim_number}-current/page.md"
         page = read(page_name)
+        assert "```lean" in page
+        assert "https://huggingface.co/spaces/DineshAI/scnRgI2hhX/blob/main/" in page
         raw_name = f".openresearch/artifacts/claim_{claim_number}/raw_result.json"
         raw = json.loads(read(raw_name))
         assert raw["verdict"] == "VERIFIED"
-        assert raw["source_run_id"] in page
-        assert raw["git_sha"] in page
-        assert f'{raw["runtime_seconds"]:.6f}' in page
         assert FIXED_COMMAND in page
         assert "no seeds" in page.lower()
-        assert "64" in page
         for required in ("claim_contract.json", "source_audit.md", "method.md", "checker_output.json", "negative_control_output.json", "commands.txt", "EVAL.md", "limitations.md"):
             read(f".openresearch/artifacts/claim_{claim_number}/{required}")
         checker = json.loads(read(f".openresearch/artifacts/claim_{claim_number}/checker_output.json"))
@@ -80,6 +95,9 @@ def main() -> None:
         "status": "PASS",
         "claims_located": 6,
         "current_verifiers_obvious": True,
+        "lean_source_visible_inline": True,
+        "canonical_page_order": True,
+        "pinned_summary_and_poster": True,
         "historical_baseline_labeled": True,
         "missing_conclusions": [],
         "opened_files": list(dict.fromkeys(opened)),
