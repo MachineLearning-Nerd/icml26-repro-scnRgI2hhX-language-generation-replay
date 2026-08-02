@@ -6,6 +6,8 @@ This clean-room campaign tests all six universal theory claims in [arXiv:2603.11
 
 Paper result: six generation/replay theorems. Observed result: all six exact claim contracts pass; seven independent proof routes and seven negative controls pass their expected outcomes. This is a **candidate forecast, not a new judge score**. The custom proof-certificate kernel is auditable Python, not a general proof assistant, which remains the main review risk.
 
+Published to the existing Space at revision [`de2f601022277cf2ab0efe03112c93405a41901f`](https://huggingface.co/spaces/DineshAI/scnRgI2hhX/commit/de2f601022277cf2ab0efe03112c93405a41901f). Status: **awaiting live judge**; the score remains 6/12 until a verdict is recorded.
+
 - [Illustrated technical report](reports/replay-reproduction/report.md)
 - [Self-contained marimo tutorial](notebooks/replay_reproduction.py)
 - [Evaluator-visible evidence matrix](pages/visibility-matrix/page.md)
@@ -30,7 +32,8 @@ The exact run command is invariant across the tree.
 | [`orx/claim-3-universal-witness-protection-proof`](https://github.com/MachineLearning-Nerd/icml26-repro-scnRgI2hhX-language-generation-replay/tree/orx/claim-3-universal-witness-protection-proof) | Universal Witness Protection obligations | `uv sync --frozen --no-dev && uv run --no-sync python repro/src/verify.py && uv run --no-sync python repro/src/publication_gate.py` | Candidate VERIFIED | HF `cpu-upgrade`, 64 CPUs, 21 s |
 | [`orx/claim-4-infinite-diagonalization-certificate`](https://github.com/MachineLearning-Nerd/icml26-repro-scnRgI2hhX-language-generation-replay/tree/orx/claim-4-infinite-diagonalization-certificate) | All-phase diagonalization | `uv sync --frozen --no-dev && uv run --no-sync python repro/src/verify.py && uv run --no-sync python repro/src/publication_gate.py` | Candidate VERIFIED | HF `cpu-upgrade`, 64 CPUs, 21 s |
 | [`orx/claim-5-universal-mq-lower-bound-certificate`](https://github.com/MachineLearning-Nerd/icml26-repro-scnRgI2hhX-language-generation-replay/tree/orx/claim-5-universal-mq-lower-bound-certificate) | Universal MQ lower-bound dichotomy | `uv sync --frozen --no-dev && uv run --no-sync python repro/src/verify.py && uv run --no-sync python repro/src/publication_gate.py` | Candidate VERIFIED | HF `cpu-upgrade`, 64 CPUs, 21 s |
-| [`orx/evaluator-visible-release-candidate`](https://github.com/MachineLearning-Nerd/icml26-repro-scnRgI2hhX-language-generation-replay/tree/orx/evaluator-visible-release-candidate) | Cumulative regression and publication gates | `uv sync --frozen --no-dev && uv run --no-sync python repro/src/verify.py && uv run --no-sync python repro/src/publication_gate.py` | Pending cumulative run | HF `cpu-upgrade`, estimated 1 core, <2 min |
+| [`orx/evaluator-visible-release-candidate`](https://github.com/MachineLearning-Nerd/icml26-repro-scnRgI2hhX-language-generation-replay/tree/orx/evaluator-visible-release-candidate) | Cumulative regression and publication gates | `uv sync --frozen --no-dev && uv run --no-sync python repro/src/verify.py && uv run --no-sync python repro/src/publication_gate.py` | Candidate VERIFIED; visibility gate PASS | HF `cpu-upgrade`, 64 CPUs, 21 s |
+| [`orx/space-relative-evidence-and-release-audit`](https://github.com/MachineLearning-Nerd/icml26-repro-scnRgI2hhX-language-generation-replay/tree/orx/space-relative-evidence-and-release-audit) | Protected-history subset, two-pass blind traversal, exact upload manifest | `uv sync --frozen --no-dev && uv run --no-sync python repro/src/verify.py && uv run --no-sync python repro/src/publication_gate.py` | Winning branch; all release gates PASS | HF `cpu-upgrade`, 64 CPUs, 21 s |
 
 ## Environment
 
