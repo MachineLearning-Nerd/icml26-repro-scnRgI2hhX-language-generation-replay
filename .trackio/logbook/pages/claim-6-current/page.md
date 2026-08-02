@@ -31,6 +31,8 @@ reported 64 logical/affinity CPUs, and took 0.019140 s in the verifier. The cell
 `01d8d9fbdea511715c7715f125402d585a5b5ffd`, reported the same allocation, and took 0.017153 s.
 Both are deterministic and use no seeds.
 
+Fixed command: `uv sync --frozen --no-dev && uv run --no-sync python repro/src/verify.py && uv run --no-sync python repro/src/publication_gate.py`
+
 The negative control changes one hypothesis to the common half-line. The contradiction then
 disappears and both verifiers exit 1. The independent structural checker and independent cell
 truth-table checker both return `PASS` on the unmutated evidence.
