@@ -17,6 +17,12 @@
     "file": "pages/index.md",
     "children": [
       {
+        "slug": "claim-3-current",
+        "title": "Current verification — Claim 3 universal WP proof",
+        "file": "pages/claim-3-current/page.md",
+        "children": []
+      },
+      {
         "slug": "claim-2-current",
         "title": "Current verification — Claim 2 arbitrary thresholds",
         "file": "pages/claim-2-current/page.md",

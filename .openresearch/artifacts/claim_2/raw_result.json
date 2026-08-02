@@ -1,0 +1,8 @@
+{
+  "source_run_id":"c89d634b-4039-4d14-aba4-495b7c5b68cf",
+  "git_sha":"2324dcec8bc1867501818e5df21aff90558baebe",
+  "backend":"huggingface","flavor":"cpu-upgrade","estimated_cores":1,
+  "actual_logical_cpus":64,"actual_affinity_cpus":64,"runtime_seconds":0.025948,"seeds":[],
+  "symbolic_thresholds":["d","m"],"threshold_for_h_d":"T=max(d,m)",
+  "standard_thresholds":{"h_infinity":1,"h_n":"n+1"},"intersection":"empty after subtracting seen initial prefix","verdict":"VERIFIED"
+}

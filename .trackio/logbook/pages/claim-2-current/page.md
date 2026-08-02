@@ -14,4 +14,13 @@ The negative control removes replay legality. The shared trace then ceases to be
 
 Fixed command: `uv sync --frozen --no-dev && uv run --no-sync python repro/src/verify.py && uv run --no-sync python repro/src/publication_gate.py`
 
-Raw run metadata and outputs are added in the next cumulative descendant.
+HF run `c89d634b-4039-4d14-aba4-495b7c5b68cf` at revision
+`2324dcec8bc1867501818e5df21aff90558baebe` reported 64 logical/affinity CPUs and
+0.025948 s verifier runtime. It was deterministic with no seeds.
+
+- [Raw result](../../../../.openresearch/artifacts/claim_2/raw_result.json)
+- [Checker output](../../../../.openresearch/artifacts/claim_2/checker_output.json)
+- [Negative-control output](../../../../.openresearch/artifacts/claim_2/negative_control_output.json)
+- [Claim contract](../../../../.openresearch/artifacts/claim_2/claim_contract.json)
+- [Source audit](../../../../.openresearch/artifacts/claim_2/source_audit.md)
+- [Exact commands](../../../../.openresearch/artifacts/claim_2/commands.txt)

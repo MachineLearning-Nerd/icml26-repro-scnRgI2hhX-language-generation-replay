@@ -1,0 +1,1 @@
+{"source_run_id":"c89d634b-4039-4d14-aba4-495b7c5b68cf","mutation":"disable replay legality","exit_code":1,"failed_obligation":"replayed_outputs_make_shared_trace_legal","verdict":"REJECTED"}

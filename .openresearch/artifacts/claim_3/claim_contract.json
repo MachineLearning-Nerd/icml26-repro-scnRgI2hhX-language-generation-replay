@@ -1,0 +1,7 @@
+{
+  "claim_id":"claim_3",
+  "paper_statement":"Algorithm 2 uses only membership queries and generates in the limit with replay every countable UUS class.",
+  "source_numbering":{"judge":"Theorem 5.1","arxiv_v2":"Theorem 6.1"},
+  "quantifiers":"arbitrary countable domain/class, every target index z, every enumeration with replay",
+  "acceptance":["exact WP rule","MQ-only finite subroutines","per-round termination","eventual target criticality","eventual validity and freshness","independent checker","witness-protection mutation rejected"]
+}
