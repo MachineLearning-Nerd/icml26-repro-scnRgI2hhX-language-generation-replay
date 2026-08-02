@@ -53,6 +53,7 @@ for claim_number in range(1, 7):
     assert "VERIFIED" in page_text
     assert FIXED_COMMAND in page_text
     assert "Raw result" in page_text or "Structural raw result" in page_text
+    assert "../../../../" not in page_text
 
 logbook = json.loads((ROOT / ".trackio" / "logbook" / "logbook.json").read_text())
 assert logbook["space_id"] == "DineshAI/scnRgI2hhX"
@@ -61,11 +62,21 @@ assert logbook["root"]["children"][0]["slug"] == "visibility-matrix"
 matrix = (ROOT / ".trackio" / "logbook" / "pages" / "visibility-matrix" / "page.md").read_text()
 assert matrix.count("| Candidate VERIFIED;") == 6
 assert all(f"| {claim_number} |" in matrix for claim_number in range(1, 7))
+assert "../../../../" not in matrix
 historical = (ROOT / ".trackio" / "logbook" / "pages" / "historical-rejected-baseline" / "page.md").read_text()
 assert historical.startswith("# Historical rejected baseline")
 assert (ROOT / "reports" / "replay-reproduction" / "report.md").is_file()
 assert len(list((ROOT / "reports" / "replay-reproduction" / "images").glob("*.svg"))) == 4
 assert (ROOT / "notebooks" / "replay_reproduction.py").is_file()
+assert (ROOT / "release" / "build_space.py").is_file()
+assert (ROOT / "release" / "audit_space.py").is_file()
+allowlist = (ROOT / "release" / "upload-allowlist.txt").read_text().splitlines()
+assert allowlist == sorted(set(allowlist))
+assert "README.md" in allowlist
+assert "release/candidate-manifest.sha256" in allowlist
+assert "release/upload-allowlist.txt" in allowlist
+assert all(not Path(relative).is_absolute() and ".." not in Path(relative).parts for relative in allowlist)
+assert json.loads((ROOT / "release" / "evaluator-blind-review.json").read_text())["status"] == "PASS"
 
 text_suffixes = {".md", ".py", ".json", ".toml", ".lock", ".txt", ".svg"}
 secret_markers = ("HF_" + "TOKEN=", "HUGGING_FACE_HUB_" + "TOKEN=", "github_" + "pat_", "sk-" + "proj-")

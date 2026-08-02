@@ -8,7 +8,7 @@ Paper result: six generation/replay theorems. Observed result: all six exact cla
 
 - [Illustrated technical report](reports/replay-reproduction/report.md)
 - [Self-contained marimo tutorial](notebooks/replay_reproduction.py)
-- [Evaluator-visible evidence matrix](.trackio/logbook/pages/visibility-matrix/page.md)
+- [Evaluator-visible evidence matrix](pages/visibility-matrix/page.md)
 
 Run the fixed reproduction command:
 

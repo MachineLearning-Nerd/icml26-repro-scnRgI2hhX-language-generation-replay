@@ -39,21 +39,21 @@ truth-table checker both return `PASS` on the unmutated evidence.
 
 Downloadable evidence:
 
-- [Structural raw result](../../../../.openresearch/artifacts/claim_6/raw_result.json)
-- [Independent checker output](../../../../.openresearch/artifacts/claim_6/checker_output.json)
-- [Negative-control output](../../../../.openresearch/artifacts/claim_6/negative_control_output.json)
-- [Independent cell-route result](../../../../.openresearch/artifacts/claim_6/cell_route_result.json)
-- [Claim contract](../../../../.openresearch/artifacts/claim_6/claim_contract.json)
-- [Source audit](../../../../.openresearch/artifacts/claim_6/source_audit.md)
-- [Exact commands](../../../../.openresearch/artifacts/claim_6/commands.txt)
-- [Structural proof source](../../../../repro/src/c6_exact.py)
-- [Structural checker source](../../../../repro/src/c6_independent.py)
-- [Cell proof source](../../../../repro/src/c6_cell_solver.py)
-- [Cell checker source](../../../../repro/src/c6_cell_checker.py)
-- [Method](../../../../.openresearch/artifacts/claim_6/method.md)
-- [Limitations](../../../../.openresearch/artifacts/claim_6/limitations.md)
-- [Evaluator audit](../../../../.openresearch/artifacts/claim_6/EVAL.md)
-- [Pinned environment](../../../../uv.lock)
+- [Structural raw result](./.openresearch/artifacts/claim_6/raw_result.json)
+- [Independent checker output](./.openresearch/artifacts/claim_6/checker_output.json)
+- [Negative-control output](./.openresearch/artifacts/claim_6/negative_control_output.json)
+- [Independent cell-route result](./.openresearch/artifacts/claim_6/cell_route_result.json)
+- [Claim contract](./.openresearch/artifacts/claim_6/claim_contract.json)
+- [Source audit](./.openresearch/artifacts/claim_6/source_audit.md)
+- [Exact commands](./.openresearch/artifacts/claim_6/commands.txt)
+- [Structural proof source](./repro/src/c6_exact.py)
+- [Structural checker source](./repro/src/c6_independent.py)
+- [Cell proof source](./repro/src/c6_cell_solver.py)
+- [Cell checker source](./repro/src/c6_cell_checker.py)
+- [Method](./.openresearch/artifacts/claim_6/method.md)
+- [Limitations](./.openresearch/artifacts/claim_6/limitations.md)
+- [Evaluator audit](./.openresearch/artifacts/claim_6/EVAL.md)
+- [Pinned environment](./uv.lock)
 
 ## Scope
 

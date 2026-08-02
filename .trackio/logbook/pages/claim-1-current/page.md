@@ -19,17 +19,17 @@ HF run `eebaedd5-f831-42f2-b21c-98931b550467` at revision
 0.021013 s verifier runtime. It was deterministic with no seeds. The proof and independent checker
 passed; the mutation exited 1.
 
-- [Raw result](../../../../.openresearch/artifacts/claim_1/raw_result.json)
-- [Checker output](../../../../.openresearch/artifacts/claim_1/checker_output.json)
-- [Negative-control output](../../../../.openresearch/artifacts/claim_1/negative_control_output.json)
-- [Claim contract](../../../../.openresearch/artifacts/claim_1/claim_contract.json)
-- [Source audit](../../../../.openresearch/artifacts/claim_1/source_audit.md)
-- [Exact commands](../../../../.openresearch/artifacts/claim_1/commands.txt)
-- [Proof source](../../../../repro/src/c1_proof.py)
-- [Independent checker source](../../../../repro/src/c1_checker.py)
-- [Method](../../../../.openresearch/artifacts/claim_1/method.md)
-- [Limitations](../../../../.openresearch/artifacts/claim_1/limitations.md)
-- [Evaluator audit](../../../../.openresearch/artifacts/claim_1/EVAL.md)
-- [Pinned environment](../../../../uv.lock)
+- [Raw result](./.openresearch/artifacts/claim_1/raw_result.json)
+- [Checker output](./.openresearch/artifacts/claim_1/checker_output.json)
+- [Negative-control output](./.openresearch/artifacts/claim_1/negative_control_output.json)
+- [Claim contract](./.openresearch/artifacts/claim_1/claim_contract.json)
+- [Source audit](./.openresearch/artifacts/claim_1/source_audit.md)
+- [Exact commands](./.openresearch/artifacts/claim_1/commands.txt)
+- [Proof source](./repro/src/c1_proof.py)
+- [Independent checker source](./repro/src/c1_checker.py)
+- [Method](./.openresearch/artifacts/claim_1/method.md)
+- [Limitations](./.openresearch/artifacts/claim_1/limitations.md)
+- [Evaluator audit](./.openresearch/artifacts/claim_1/EVAL.md)
+- [Pinned environment](./uv.lock)
 
 Historical finite-support verification remains reachable and is labeled rejected baseline.
