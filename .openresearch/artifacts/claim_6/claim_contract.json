@@ -1,0 +1,16 @@
+{
+  "claim_id": "claim_6",
+  "paper_statement": "There exists a finite hypothesis class that is not properly generatable in the limit with replay.",
+  "source_numbering": {"judge": "Theorem 6.3", "arxiv_v2": "Theorem 7.3"},
+  "domain": "X = Z",
+  "assumptions": ["binary hypotheses", "UUS", "deterministic proper generator", "full enumeration with replay"],
+  "quantifiers": "There exists the stated four-member class; for every proper generator, an adaptive legal enumeration with replay defeats it.",
+  "acceptance": [
+    "Represent the two integer half-lines exactly, not by a bounded window.",
+    "Exhaust all four possible first proper outputs.",
+    "For each branch prove replay legality and exact enumeration for two simultaneous targets.",
+    "Prove no member of H is a subset of the exact target intersection.",
+    "An independent checker must accept, while a mutated class with an admissible output must be rejected."
+  ],
+  "verdict_values": ["VERIFIED", "FALSIFIED", "BLOCKED"]
+}

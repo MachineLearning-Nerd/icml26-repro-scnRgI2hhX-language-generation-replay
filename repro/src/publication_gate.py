@@ -3,6 +3,8 @@
 from __future__ import annotations
 
 import json
+import subprocess
+import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -23,6 +25,20 @@ assert verdict["run_metadata"]["requested_flavor"] == "cpu-upgrade"
 assert verdict["run_metadata"]["estimated_cores_required"] == 1
 assert verdict["run_metadata"]["cpu_logical"] >= 1
 assert verdict["run_metadata"]["runtime_seconds"] >= 0
+assert verdict["exact_claims"]["claim_6_finite_proper_replay_hardness"]["verdict"] == "VERIFIED"
+checker = subprocess.run(
+    [sys.executable, str(ROOT / "repro" / "src" / "c6_independent.py"), str(ROOT / "outputs" / "c6_exact.json")],
+    check=True,
+    capture_output=True,
+    text=True,
+)
+control = subprocess.run(
+    [sys.executable, str(ROOT / "repro" / "src" / "c6_exact.py"), "--mutated-control"],
+    check=False,
+    capture_output=True,
+    text=True,
+)
+assert control.returncode != 0
 assert (ROOT / "docs" / "SOURCE_AUDIT.md").is_file()
 assert (ROOT / "RESULTS.md").is_file()
 gate = {
@@ -44,3 +60,6 @@ gate = {
 (ROOT / "outputs" / "publication_gate.json").write_text(json.dumps(gate, indent=2, sort_keys=True) + "\n")
 (ROOT / "GATE_READY.md").write_text("FULL_GATE_READY: scnRgI2hhX\n")
 print(json.dumps(gate, indent=2))
+print("C6_INDEPENDENT_CHECKER=" + checker.stdout.strip())
+print("C6_NEGATIVE_CONTROL_EXIT=" + str(control.returncode))
+print("C6_NEGATIVE_CONTROL=" + control.stdout.strip())
