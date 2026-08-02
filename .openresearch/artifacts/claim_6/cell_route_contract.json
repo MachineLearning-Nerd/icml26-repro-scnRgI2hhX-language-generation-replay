@@ -1,0 +1,8 @@
+{
+  "claim": "Theorem 6.3 (arXiv v2 Theorem 7.3)",
+  "domain": "all integers",
+  "quantifiers": "every deterministic proper generator; all four possible first outputs",
+  "method": "exact symbolic cell decomposition",
+  "success": "all four contradictions hold on a complete partition",
+  "negative_control": "remove -2 from h2+; verifier exits nonzero"
+}

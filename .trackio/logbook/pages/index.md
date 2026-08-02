@@ -4,7 +4,8 @@
 
 | Page |
 | --- |
+| [Current verification — Claim 6 exact cell certificate](#/claim-6-cell-certificate) |
 | [Overview](#/overview) |
 | [Claims](#/claims) |
 | [Evidence](#/evidence) |
-| [Verification run](#/verification-run) |
+| [Historical rejected baseline — Verification run](#/verification-run) |
