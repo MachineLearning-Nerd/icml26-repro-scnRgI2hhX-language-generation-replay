@@ -16,4 +16,13 @@ All finite predicates use membership queries only. The independent checker valid
 
 Fixed command: `uv sync --frozen --no-dev && uv run --no-sync python repro/src/verify.py && uv run --no-sync python repro/src/publication_gate.py`
 
-Raw remote evidence is added in the next cumulative descendant.
+HF run `5966f711-13d1-4c71-bbd7-46b6488f60a3` at revision
+`a22f52d44466353c18177fc1fba306dea58a2c4e` reported 64 logical/affinity CPUs and
+0.023147 s verifier runtime. It was deterministic with no seeds.
+
+- [Raw result](../../../../.openresearch/artifacts/claim_3/raw_result.json)
+- [Checker output](../../../../.openresearch/artifacts/claim_3/checker_output.json)
+- [Negative-control output](../../../../.openresearch/artifacts/claim_3/negative_control_output.json)
+- [Claim contract](../../../../.openresearch/artifacts/claim_3/claim_contract.json)
+- [Source audit](../../../../.openresearch/artifacts/claim_3/source_audit.md)
+- [Exact commands](../../../../.openresearch/artifacts/claim_3/commands.txt)

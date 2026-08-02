@@ -1,0 +1,1 @@
+{"source_run_id":"5966f711-13d1-4c71-bbd7-46b6488f60a3","git_sha":"a22f52d44466353c18177fc1fba306dea58a2c4e","backend":"huggingface","flavor":"cpu-upgrade","estimated_cores":1,"actual_logical_cpus":64,"actual_affinity_cpus":64,"runtime_seconds":0.023147,"seeds":[],"proof_lemmas":6,"obligations":18,"exclusion_bound":"2t+t^2","verdict":"VERIFIED"}

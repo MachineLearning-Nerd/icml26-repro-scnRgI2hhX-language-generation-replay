@@ -17,6 +17,12 @@
     "file": "pages/index.md",
     "children": [
       {
+        "slug": "claim-4-current",
+        "title": "Current verification — Claim 4 infinite diagonalization",
+        "file": "pages/claim-4-current/page.md",
+        "children": []
+      },
+      {
         "slug": "claim-3-current",
         "title": "Current verification — Claim 3 universal WP proof",
         "file": "pages/claim-3-current/page.md",

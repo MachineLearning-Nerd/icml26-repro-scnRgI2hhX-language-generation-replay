@@ -29,6 +29,7 @@ assert verdict["exact_claims"]["claim_6_finite_proper_replay_hardness"]["verdict
 assert verdict["exact_claims"]["claim_1_uniform_replay_equivalence"]["verdict"] == "VERIFIED"
 assert verdict["exact_claims"]["claim_2_countable_nonuniform_separation"]["verdict"] == "VERIFIED"
 assert verdict["exact_claims"]["claim_3_wp_countable_limit_generation"]["verdict"] == "VERIFIED"
+assert verdict["exact_claims"]["claim_4_uncountable_limit_separation"]["verdict"] == "VERIFIED"
 checker = subprocess.run(
     [sys.executable, str(ROOT / "repro" / "src" / "c6_independent.py"), str(ROOT / "outputs" / "c6_exact.json")],
     check=True,
@@ -55,6 +56,12 @@ c2_checker = subprocess.run(
 )
 c3_checker = subprocess.run(
     [sys.executable, str(ROOT / "repro" / "src" / "c3_checker.py"), str(ROOT / "outputs" / "c3_proof.json")],
+    check=True,
+    capture_output=True,
+    text=True,
+)
+c4_checker = subprocess.run(
+    [sys.executable, str(ROOT / "repro" / "src" / "c4_checker.py"), str(ROOT / "outputs" / "c4_proof.json")],
     check=True,
     capture_output=True,
     text=True,
@@ -94,6 +101,13 @@ c3_control = subprocess.run(
     text=True,
 )
 assert c3_control.returncode != 0
+c4_control = subprocess.run(
+    [sys.executable, str(ROOT / "repro" / "src" / "c4_proof.py"), "--mutated-control"],
+    check=False,
+    capture_output=True,
+    text=True,
+)
+assert c4_control.returncode != 0
 assert (ROOT / "docs" / "SOURCE_AUDIT.md").is_file()
 assert (ROOT / "RESULTS.md").is_file()
 gate = {
@@ -130,3 +144,6 @@ print("C2_NEGATIVE_CONTROL=" + c2_control.stdout.strip())
 print("C3_CHECKER=" + c3_checker.stdout.strip())
 print("C3_NEGATIVE_CONTROL_EXIT=" + str(c3_control.returncode))
 print("C3_NEGATIVE_CONTROL=" + c3_control.stdout.strip())
+print("C4_CHECKER=" + c4_checker.stdout.strip())
+print("C4_NEGATIVE_CONTROL_EXIT=" + str(c4_control.returncode))
+print("C4_NEGATIVE_CONTROL=" + c4_control.stdout.strip())
