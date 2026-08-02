@@ -26,6 +26,7 @@ from c1_proof import certify as certify_c1
 from c2_proof import certify as certify_c2
 from c3_proof import certify as certify_c3
 from c4_proof import certify as certify_c4
+from c5_proof import certify as certify_c5
 
 ROOT = Path(__file__).resolve().parents[2]
 OUT = ROOT / "outputs"
@@ -324,6 +325,7 @@ def main() -> None:
         "claim_2_countable_nonuniform_separation": certify_c2(),
         "claim_3_wp_countable_limit_generation": certify_c3(),
         "claim_4_uncountable_limit_separation": certify_c4(),
+        "claim_5_proper_membership_query_lower_bound": certify_c5(),
         "claim_6_finite_proper_replay_hardness": verify_c6_exact(),
         "claim_6_independent_cell_route": certify_c6_cells(),
     }
@@ -332,6 +334,7 @@ def main() -> None:
     assert exact_claims["claim_2_countable_nonuniform_separation"]["verdict"] == "VERIFIED"
     assert exact_claims["claim_3_wp_countable_limit_generation"]["verdict"] == "VERIFIED"
     assert exact_claims["claim_4_uncountable_limit_separation"]["verdict"] == "VERIFIED"
+    assert exact_claims["claim_5_proper_membership_query_lower_bound"]["verdict"] == "VERIFIED"
     result = {
         "paper": "scnRgI2hhX",
         "arxiv": "2603.11784",
@@ -362,6 +365,7 @@ def main() -> None:
     (OUT / "c2_proof.json").write_text(json.dumps(exact_claims["claim_2_countable_nonuniform_separation"], indent=2, sort_keys=True) + "\n")
     (OUT / "c3_proof.json").write_text(json.dumps(exact_claims["claim_3_wp_countable_limit_generation"], indent=2, sort_keys=True) + "\n")
     (OUT / "c4_proof.json").write_text(json.dumps(exact_claims["claim_4_uncountable_limit_separation"], indent=2, sort_keys=True) + "\n")
+    (OUT / "c5_proof.json").write_text(json.dumps(exact_claims["claim_5_proper_membership_query_lower_bound"], indent=2, sort_keys=True) + "\n")
     print(json.dumps({"run_metadata": result["run_metadata"],
                       "all_claims_passed": result["all_claims_passed"], "claim_count": len(claims),
                       "claims": {k: v["passed"] for k, v in claims.items()}}, indent=2))
@@ -371,6 +375,7 @@ def main() -> None:
     print("C2_PROOF_RESULT=" + json.dumps(exact_claims["claim_2_countable_nonuniform_separation"], sort_keys=True))
     print("C3_PROOF_RESULT=" + json.dumps(exact_claims["claim_3_wp_countable_limit_generation"], sort_keys=True))
     print("C4_PROOF_RESULT=" + json.dumps(exact_claims["claim_4_uncountable_limit_separation"], sort_keys=True))
+    print("C5_PROOF_RESULT=" + json.dumps(exact_claims["claim_5_proper_membership_query_lower_bound"], sort_keys=True))
 
 
 if __name__ == "__main__":

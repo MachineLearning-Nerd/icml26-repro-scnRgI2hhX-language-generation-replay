@@ -14,4 +14,13 @@ The independent checker validates the proof DAG. Removing replay permission for 
 
 Fixed command: `uv sync --frozen --no-dev && uv run --no-sync python repro/src/verify.py && uv run --no-sync python repro/src/publication_gate.py`
 
-Raw remote evidence is added in the next cumulative descendant.
+HF run `85301bff-155c-425e-9fc8-76973c7a9c5d` at revision
+`14ee45596d549cd6f1cfbb3e09155f5d50706718` reported 64 logical/affinity CPUs and
+0.042127 s verifier runtime. It was deterministic with no seeds.
+
+- [Raw result](../../../../.openresearch/artifacts/claim_4/raw_result.json)
+- [Checker output](../../../../.openresearch/artifacts/claim_4/checker_output.json)
+- [Negative-control output](../../../../.openresearch/artifacts/claim_4/negative_control_output.json)
+- [Claim contract](../../../../.openresearch/artifacts/claim_4/claim_contract.json)
+- [Source audit](../../../../.openresearch/artifacts/claim_4/source_audit.md)
+- [Exact commands](../../../../.openresearch/artifacts/claim_4/commands.txt)
